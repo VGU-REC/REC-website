@@ -1,8 +1,9 @@
 import React from 'react';
+import Form from './components/Form';
 function App() {
   return (
-    <div className="App text-3xl font-bold underline">
-      Test
+    <div>
+      <Form/>
     </div>
   );
 }

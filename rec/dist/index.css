@@ -466,17 +466,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-backdrop-sepia:  ;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@100&display=swap');
-
-h1 {
-  text-align: center;
-  font-size: 3rem;
-  line-height: 1;
-  font-weight: 500;
+.underline {
+  -webkit-text-decoration-line: underline;
+          text-decoration-line: underline;
 }
 
-.form {
-  --tw-bg-opacity: 1;
-  background-color: rgb(216 216 216 / var(--tw-bg-opacity));
-  font-family: Public Sans;
+.thanh {
+  -webkit-text-decoration-line: underline;
+          text-decoration-line: underline;
 }
