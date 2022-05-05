@@ -3,10 +3,27 @@
 @tailwind utilities;
 @import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@100&display=swap');
 h1 {
-    @apply text-5xl text-center font-medium;
+    @apply text-5xl text-center font-medium p-5;
 }
 
-
-.form {
+.pform{
     @apply font-body bg-form;
 }
+
+.pform h4 {
+    @apply flex justify-center;
+}
+
+
+label {
+    @apply block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2;
+}
+
+input, textarea, button {
+    @apply appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight;
+}
+
+button {
+    @apply grid content-start bg-black inline-block rounded text-white;
+}
+
