@@ -17,10 +17,11 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts start && build:css",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "build:css": "tailwindcss -i ./src/styles.css -o ./src/index.css"
   },
   "eslintConfig": {
     "extends": [

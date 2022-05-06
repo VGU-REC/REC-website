@@ -14,16 +14,18 @@ h1 {
     @apply flex justify-center;
 }
 
-
-label {
-    @apply block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2;
-}
-
-input, textarea, button {
-    @apply appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight;
-}
-
 button {
     @apply grid content-start bg-black inline-block rounded text-white;
 }
 
+.form {
+    @apply flex justify-center pt-3;
+}
+
+.form div {
+    @apply p-3;
+}
+
+label {
+    @apply pr-2;
+}

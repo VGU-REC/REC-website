@@ -466,6 +466,35 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-backdrop-sepia:  ;
 }
 
+.col-span-1 {
+  grid-column: span 1 / span 1;
+}
+
+.grid {
+  display: grid;
+}
+
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+.gap-4 {
+  gap: 1rem;
+}
+
+.pr-2 {
+  padding-right: 0.5rem;
+}
+
+.underline {
+  -webkit-text-decoration-line: underline;
+          text-decoration-line: underline;
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@100&display=swap');
 
 h1 {
@@ -487,37 +516,6 @@ h1 {
   justify-content: center;
 }
 
-label {
-  margin-bottom: 0.5rem;
-  display: block;
-  font-size: 0.75rem;
-  line-height: 1rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.025em;
-  --tw-text-opacity: 1;
-  color: rgb(55 65 81 / var(--tw-text-opacity));
-}
-
-input, textarea, button {
-  margin-bottom: 0.75rem;
-  display: block;
-  width: 100%;
-  -webkit-appearance: none;
-          appearance: none;
-  border-radius: 0.25rem;
-  border-width: 1px;
-  --tw-bg-opacity: 1;
-  background-color: rgb(229 231 235 / var(--tw-bg-opacity));
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  line-height: 1.25;
-  --tw-text-opacity: 1;
-  color: rgb(55 65 81 / var(--tw-text-opacity));
-}
-
 button {
   display: inline-block;
   display: grid;
@@ -529,3 +527,16 @@ button {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+.form {
+  display: flex;
+  justify-content: center;
+  padding-top: 0.75rem;
+}
+
+.form div {
+  padding: 0.75rem;
+}
+
+label {
+  padding-right: 0.5rem;
+}
