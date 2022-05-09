@@ -82,12 +82,10 @@ type _Db = {
 type DbCollection = keyof _Db;
 type DbDoc<T extends DbCollection> = _Db[T];
 
-type DbPrimaryKey<T extends DbCollection | DbDoc<DbCollection>> = T extends
-  | "user"
-  | User
-  ? "email"
-  : "id";
-type OmitPrimaryKey<T extends DbDoc<DbCollection>> = Omit<T, DbPrimaryKey<T>>;
+type OmitId<T extends DbDoc<DbCollection>> = Omit<
+  T,
+  T extends User ? "email" : "id"
+>;
 
 export type {
   User,
@@ -101,6 +99,5 @@ export type {
   Achievement,
   DbCollection,
   DbDoc,
-  DbPrimaryKey,
-  OmitPrimaryKey,
+  OmitId,
 };
