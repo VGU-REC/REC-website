@@ -1,5 +1,10 @@
 import { DbCollection, DbDoc, OmitPrimaryKey } from "interfaces";
 
+declare function add<T extends DbCollection>(
+  col: T,
+  data: OmitPrimaryKey<DbDoc<T>>
+): Promise<void>;
+
 declare function set<T extends DbCollection>(
   col: T,
   id: string,
@@ -20,4 +25,4 @@ declare function update<T extends DbCollection>(
 
 declare function del<T extends DbCollection>(col: T, id: string): Promise<void>;
 
-export { set, get, update, del };
+export { add, set, get, update, del };
