@@ -20,7 +20,7 @@
   "scripts": {
     "start": "react-scripts start && build:css",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "firebase emulators:exec --project rec-website-43135 \"react-scripts test\"",
     "eject": "react-scripts eject",
     "build:css": "tailwindcss -i ./src/styles.css -o ./src/index.css"
   },
