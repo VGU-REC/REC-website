@@ -4,11 +4,11 @@ import Blog from 'components/Blog';
 import Pagination from 'components/Pagination';
 import React from 'react';
 function App() {
-  return (
-    <div>
-      <Achievement/>
-    </div>
-  );
+    return (
+        <div>
+            <Activity />
+        </div>
+    );
 }
 
 export default App;
