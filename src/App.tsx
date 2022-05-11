@@ -1,14 +1,12 @@
+import Achievement from 'components/Achievement';
+import Activity from 'components/Activity';
+import Blog from 'components/Blog';
+import Pagination from 'components/Pagination';
 import React from 'react';
-import About from './components/About';
-import Achievement from './components/Achievement';
-import Blog from './components/Blog';
-import Form from './components/Form';
-import Home from './components/Home';
-import Project from './components/Project';
 function App() {
   return (
     <div>
-      <Blog/>
+      <Achievement/>
     </div>
   );
 }
