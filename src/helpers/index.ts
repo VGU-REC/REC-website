@@ -1,1 +1,1 @@
-export * from "./objectEquals";
+export * from "./object_equals";

@@ -1,4 +1,4 @@
-import { objectEquals } from "helpers/objectEquals";
+import { objectEquals } from "helpers/object_equals";
 
 describe("helper functions", () => {
   describe("objectEquals", () => {
