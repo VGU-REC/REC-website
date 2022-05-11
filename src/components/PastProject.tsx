@@ -1,18 +1,22 @@
 import React from 'react';
+import Card from './Card';
+import Carousel from './Carousel';
+import Pagination from './Pagination';
 function PastProject() {
   return (
     <div>
-      <h1>PAST PROJECT</h1>
-        <hr></hr>
+      <Carousel/>
+      <div className="grid grid-cols-1 divide-black divide-y-4">
         <div>
-          <h4>Topic</h4>
-          <div>Description</div>
-          <button>See more</button>
-
-          <h4>Topic</h4>
-          <div>Description</div>
-          <button>See more</button>
+          <h1 className='text-xl p-3 font-bold'>PAST PROJECT</h1>
         </div>
+        <div className='p-3'>
+          <Card/>
+          <Card/>
+          <Card/>
+      </div>
+      </div>
+      <Pagination/>
     </div>
   );
 }
