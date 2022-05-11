@@ -1,71 +1,74 @@
 // User
-interface User {
+export interface User {
   email: string;
   role: UserRole;
 }
 
-type UserRole = "GUEST" | "MEMBER" | "ADMIN";
+export type UserRole = "GUEST" | "MEMBER" | "ADMIN";
 
 // Activity
-interface RecEvent {
+export interface RecEvent {
   id: string;
   title: string;
-  description: string;
+  description: RichText;
   imagePaths: string[];
   date: Date;
 }
 
-interface Workshop {
+export interface Workshop {
   id: string;
   title: string;
   host: string;
-  description: string;
+  description: RichText;
   imagePaths: string[];
   date: Date;
 }
 
 // Blog
-interface Blog {
+export interface Blog {
   id: string;
   title: string;
-  content: string;
+  content: RichText;
   author: string;
-  date: Date;
+  dateWritten: Date;
 }
 
 // Project
-interface ProjectIdea {
+export interface ProjectIdea {
   id: string;
   topic: string;
-  description: string;
+  description: RichText;
 }
 
-interface RecruitingProject {
+export interface RecruitingProject {
   id: string;
   host: User;
   hostFacebook: string;
   hostPhoneNumber: string;
-  aboutSelf: string;
-  description: string;
+  aboutSelf: RichText;
+  description: RichText;
   totalMember: number;
   isPending: boolean;
 }
 
-interface PastProject {
+export interface PastProject {
   id: string;
   title: string;
   author: string;
-  content: string;
-  date: Date;
+  content: RichText;
+  dateWritten: Date;
 }
 
 // Achievement
-interface Achievement {
+export interface Achievement {
   id: string;
   title: string;
   imagePath: string;
   date: Date;
 }
+
+// RichText
+export type RichText = object;
 
 // Helper types
 type _Db = {
@@ -79,25 +82,10 @@ type _Db = {
   ["achievement"]: Achievement;
 };
 
-type DbCollection = keyof _Db;
-type DbDoc<T extends DbCollection> = _Db[T];
+export type DbCollection = keyof _Db;
+export type DbDoc<T extends DbCollection> = _Db[T];
 
-type OmitId<T extends DbDoc<DbCollection>> = Omit<
+export type OmitId<T extends DbDoc<DbCollection>> = Omit<
   T,
   T extends User ? "email" : "id"
 >;
-
-export type {
-  User,
-  UserRole,
-  RecEvent,
-  Workshop,
-  Blog,
-  ProjectIdea,
-  RecruitingProject,
-  PastProject,
-  Achievement,
-  DbCollection,
-  DbDoc,
-  OmitId,
-};
