@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "rec-website-43135"
-  }
+    "default": "rec-website-43135",
+    "dev": "rec-website-43135",
+    "prod": "rec-website-43135"
+  },
+  "targets": {}
 }
