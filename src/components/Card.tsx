@@ -1,6 +1,4 @@
 import React from 'react';
-import Carousel from './Carousel';
-import Pagination from './Pagination';
 function Card() {
   return (
     <div>

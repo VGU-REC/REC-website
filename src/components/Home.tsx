@@ -1,56 +1,56 @@
 import React from 'react';
+import Card from './Card';
+import CardNoImage from './CardNoImage';
+import Carousel from './Carousel';
 function Home() {
   return (
     <div>
-        <div>Carousel</div>
+        <Carousel/>
+        <div className="grid grid-cols-1 divide-black divide-y-4">
+          <div>
+            <h1 className='text-xl p-3 font-bold'>ACTIVITY</h1>
+          </div>
+          <div>
+            <div className='grid grid-cols-2'>
+              <div className='cols-1'>
+                <Card/>
+                <Card/>
+                <Card/>
+              </div>
+              <div className='cols-2'>
+                <CardNoImage/>
+                <CardNoImage/>
+                <CardNoImage/>
+              </div>
+            </div>
 
-        <h1>ACTIVITY</h1>
-        <hr></hr>
-        <div>
-          <div>Image here</div>
-          <h4>Headline</h4>
-          <div>Description</div>
-
-          <div>Image here</div>
-          <h4>Headline</h4>
-          <div>Description</div>
-
-          <div>Image here</div>
-          <h4>Headline</h4>
-          <div>Description</div>
-        </div>
-        <div>
-          <h4>Title</h4>
-          <div>Description</div>
-
-          <h4>Title</h4>
-          <div>Description</div>
-        </div>
-
-        <h1>PROJECT</h1>
-        <hr></hr>
-        <div>
-          <div>Image here</div>
-          <div>Description</div>
-
-          <div>Image here</div>
-          <div>Description</div>
-        </div>
-
-        <h1>BLOG</h1>
-        <hr></hr>
-        <div>
-          <div>Image here</div>
-          <h4>Headline</h4>
-          <div>Description</div>
-
-          <div>Image here</div>
-          <h4>Headline</h4>
-          <div>Description</div>
-
-          <div>Image here</div>
-          <h4>Headline</h4>
-          <div>Description</div>
+            <h1 className='text-xl p-3 font-bold'>PROJECT</h1>
+          </div>
+          <div>
+          <div className='grid grid-cols-2'>
+              <div className='cols-1'>
+                <Card/>
+                <Card/>
+              </div>
+              <div className='cols-2'>
+                <Card/>
+                <Card/>
+              </div>
+            </div>
+            <h1 className='text-xl p-3 font-bold'>BLOG</h1>
+          </div>
+          <div>
+          <div className='grid grid-cols-2'>
+              <div className='cols-1'>
+                <Card/>
+              </div>
+              <div className='cols-2'>
+              <Card/>
+                <Card/>
+                <Card/>
+              </div>
+            </div>
+          </div>
         </div>
     </div>
   );

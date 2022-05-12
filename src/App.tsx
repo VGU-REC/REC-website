@@ -13,7 +13,7 @@ function App() {
   return (
     <div>
     {/* <Navbar/> */}
-    <Routes>
+    {/* <Routes>
       <Route path="/" element={<Home />}>
         <Route path="about" element={<About />} />
         <Route path="activity" element={<Activity />} />
@@ -21,8 +21,9 @@ function App() {
         <Route path="blog" element={<Blog />} />
         <Route path="achievement" element={<Achievement />} />
       </Route>   
-    </Routes>
+    </Routes> */}
     {/* <Footer/> */}
+    <Home/>
     </div>
   );
 }
