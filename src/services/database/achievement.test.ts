@@ -2,7 +2,15 @@ import { objectEquals } from "helpers";
 import { Achievement, OmitId } from "interfaces";
 import { add, set, get, onSnapshot, update, del } from "services/database";
 
+import { connectFirestoreEmulator, getFirestore } from "firebase/firestore";
+import { emulators } from "../../../firebase.json";
+
 describe("database api", () => {
+  // connect to firestore emulator
+  const db = getFirestore();
+  const { port } = emulators.firestore;
+  connectFirestoreEmulator(db, "localhost", port);
+
   describe("achievement", () => {
     // set up
 
