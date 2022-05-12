@@ -23,7 +23,7 @@ function App() {
       </Route>   
     </Routes> */}
     {/* <Footer/> */}
-    <Project/>
+    <About/>
     </div>
   );
 }
