@@ -4,7 +4,7 @@ import Card from './Card';
 import CardNoImage from './CardNoImage';
 function Project() {
   return (
-    <div>
+    <div className='bg-gray-200'>
         <div className='grid grid-cols-2'>
           <div className='col-1 pt-20'>
             <h1 className='text-xl p-3 font-bold text-center'>PAST PROJECT</h1>
@@ -23,7 +23,7 @@ function Project() {
             <h1 className='text-xl p-3 font-bold'>PENDING PROJECT</h1>
           </div>
           <div>
-          <div className='grid grid-cols-3'>
+          <div className='grid grid-cols-3 p-3'>
               <div className='cols-1'>
                 <CardNoImage/>
               </div>
@@ -37,7 +37,7 @@ function Project() {
             <h1 className='text-xl p-3 font-bold'>RECRUIT PROJECT</h1>
           </div>
           <div>
-          <div className='grid grid-cols-3'>
+          <div className='grid grid-cols-3 p-3'>
               <div className='cols-1'>
                 <Card/>
                 <Card/>
@@ -53,7 +53,7 @@ function Project() {
             </div>
             <h1 className='text-xl p-3 font-bold'>IDEA</h1>
           </div>
-          <div className='grid grid-cols-1 gap-4 content-center'>
+          <div className='grid grid-cols-1 gap-4 content-center p-3'>
             <div>
               <CardNoImage/>
             </div>
