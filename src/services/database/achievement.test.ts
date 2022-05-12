@@ -147,6 +147,9 @@ describe("database api", () => {
       // onSnapshot
       const unsub = onSnapshot("achievement", id, (achievement) => {
         totalChanges++;
+        if (!achievement) {
+          throw new Error("Data not found");
+        }
         doc = achievement;
       });
 
