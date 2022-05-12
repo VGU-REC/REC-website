@@ -1,6 +1,6 @@
 // User
 export interface User {
-  email: string;
+  id: string;
   role: UserRole;
 }
 
@@ -82,10 +82,7 @@ type _Db = {
   ["achievement"]: Achievement;
 };
 
-export type DbCollection = keyof _Db;
-export type DbDoc<T extends DbCollection> = _Db[T];
+export type DbCol = keyof _Db;
+export type DbDoc<T extends DbCol> = _Db[T];
 
-export type OmitId<T extends DbDoc<DbCollection>> = Omit<
-  T,
-  T extends User ? "email" : "id"
->;
+export type OmitId<T extends DbDoc<DbCol>> = Omit<T, "id">;
