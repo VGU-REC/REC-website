@@ -1,5 +1,5 @@
 import { objectEquals } from "helpers";
-import { Achievement, OmitId } from "interfaces";
+import { Achievement, OmitId } from "services/database";
 import { add, set, get, onSnapshot, update, del } from "services/database";
 
 import { connectFirestoreEmulator, getFirestore } from "firebase/firestore";
