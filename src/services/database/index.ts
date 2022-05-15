@@ -1,162 +1,149 @@
-import { DbCol, DbDoc, OmitId } from "interfaces";
-import { initializeApp } from "firebase/app";
+import { DataType, Data, OmitId, DataBatchReader } from "./types";
+import { Optional, NonUnion } from "types";
+import { db } from "./firestore";
 import {
   addDoc,
   collection,
   doc,
   getDoc,
   getDocs,
-  getFirestore,
   setDoc,
   onSnapshot as onSnap,
   QuerySnapshot,
   DocumentSnapshot,
   updateDoc,
   deleteDoc,
+  increment,
+  runTransaction,
+  DocumentReference,
 } from "firebase/firestore";
 
-// Firebase config (These are public keys so they're fine to be exposed)
-const firebaseConfig = {
-  apiKey: "AIzaSyCqpDcGNRnQvy_RzSjGMSTeEi7CN1v7My4",
-  authDomain: "rec-website-43135.firebaseapp.com",
-  projectId: "rec-website-43135",
-  storageBucket: "rec-website-43135.appspot.com",
-  messagingSenderId: "291556748153",
-  appId: "1:291556748153:web:ddecc4d8dc3e3e9a6a1da8",
-};
+export * from "./types";
 
-initializeApp(firebaseConfig);
-
-const db = getFirestore();
-
-// database api
-
-async function add<Col extends DbCol>(
-  col: Col,
-  data: OmitId<DbDoc<Col>>
-): Promise<void> {
-  if (col === "user" && (data as OmitId<DbDoc<"user">>).role === "GUEST") {
-    // we don't store GUEST in database (user is GUEST if not in db)
-    return;
-  }
-  await addDoc(collection(db, col), data);
-}
-
-async function set<Col extends DbCol>(
-  col: Col,
+/**
+ * Add a new data entry to the database.
+ */
+export async function add<T extends DataType>(
+  type: T,
   id: string,
-  data: OmitId<DbDoc<Col>>
+  data: OmitId<Data<NonUnion<T>>>
 ): Promise<void> {
-  if (col === "user" && (data as OmitId<DbDoc<"user">>).role === "GUEST") {
+  if (type === "user" && (data as OmitId<Data<"user">>).role === "GUEST") {
     // we don't store GUEST in database (user is GUEST if not in db)
-    await deleteDoc(doc(db, col, id));
     return;
   }
-  await setDoc(doc(db, col, id), data);
+
+  await runTransaction(db, async (transaction) => {
+    const docRef = doc(db, type, id);
+    const snap = await transaction.get(docRef);
+
+    if (snap.exists()) {
+      throw new Error(`Data with this id already exists: ${id}`);
+    }
+
+    const metadataRef = doc(db, "--metadata--", type);
+
+    transaction
+      .set(docRef, data) // add doc
+      .set(metadataRef, { count: increment(1) }, { merge: true }); // increment counter
+  });
 }
 
-type GetDocReturnType<Col extends DbCol> = Col extends "user"
-  ? DbDoc<Col>
-  : DbDoc<Col> | null;
-
-function get<Col extends DbCol>(col: Col): Promise<DbDoc<Col>[]>;
-function get<Col extends DbCol>(
-  col: Col,
+/**
+ * Retrieve a data entry from the database.
+ */
+export async function get<T extends DataType>(
+  type: T,
   id: string
-): Promise<GetDocReturnType<Col>>;
-async function get<Col extends DbCol>(
-  col: Col,
-  id?: string
-): Promise<DbDoc<Col>[] | GetDocReturnType<Col>> {
-  if (id) {
-    const snap = await getDoc(doc(db, col, id));
-    return (
-      snap.exists()
-        ? ({ id: snap.id, ...snap.data() } as DbDoc<Col>)
-        : col === "user"
-        ? // we don't store GUEST in database (user is GUEST if not in db)
-          ({ id, role: "GUEST" } as DbDoc<"user">)
-        : null
-    ) as GetDocReturnType<Col>;
+): Promise<Data<NonUnion<T>>> {
+  const docRef = doc(db, type, id);
+  const snap = await getDoc(docRef);
+
+  if (snap.exists()) {
+    return { id, ...snap.data() } as Data<NonUnion<T>>;
   }
 
-  const snap = await getDocs(collection(db, col));
-  return snap.docs.map((doc) => ({ id: doc.id, ...doc.data() } as DbDoc<Col>));
+  if (type === "user") {
+    // we don't store GUEST in database (user is GUEST if not in db)
+    return { id, role: "GUEST" } as Data<NonUnion<T>>;
+  }
+
+  throw new Error(`Data with this id does not exist: ${id}`);
 }
 
-function onSnapshot<Col extends DbCol>(
-  col: Col,
-  listener: (docs: DbDoc<Col>[]) => void,
-  onError?: (error: Error) => void
-): () => void;
-function onSnapshot<Col extends DbCol>(
-  col: Col,
-  id: string,
-  listener: (doc: GetDocReturnType<Col>) => void,
-  onError?: (error: Error) => void
-): () => void;
-function onSnapshot<Col extends DbCol>(
-  col: Col,
-  idOrListener: string | ((docs: DbDoc<Col>[]) => void),
-  listenerOrOnError?:
-    | ((doc: GetDocReturnType<Col>) => void)
-    | ((error: Error) => void),
-  onError?: (error: Error) => void
-): () => void {
-  if (typeof idOrListener === "string") {
-    // second overload
-    const id = idOrListener;
-    const listener = listenerOrOnError as (doc: GetDocReturnType<Col>) => void;
+/**
+ * Create a data batch reader for data pagination.
+ */
+export function createBatchReader<T extends DataType>(
+  type: T
+): DataBatchReader<NonUnion<T>> {
+  return {
+    type: type as NonUnion<T>,
 
-    const onNext = (snap: DocumentSnapshot): void => {
-      const doc = snap.exists()
-        ? ({ id: snap.id, ...snap.data() } as DbDoc<Col>)
-        : col === "user"
-        ? // we don't store GUEST in database (user is GUEST if not in db)
-          ({ id, role: "GUEST" } as DbDoc<"user">)
-        : null;
-      listener(doc as GetDocReturnType<Col>);
-    };
+    async getCount() {
+      const metadataRef = doc(db, "--metadata--", this.type);
+      const metadata = await getDoc(metadataRef);
+      return metadata.get("count") ?? 0;
+    },
 
-    return onSnap(doc(db, col, id), onNext, onError);
-  }
+    async next(count) {
+      const colRef = collection(db, type);
+    },
 
-  // first overload
-  const listener = idOrListener;
-  onError = listenerOrOnError as (error: Error) => void;
-
-  const onNext = (snap: QuerySnapshot): void => {
-    const docs = snap.docs.map(
-      (doc) => ({ id: doc.id, ...doc.data() } as DbDoc<Col>)
-    );
-    listener(docs);
+    async previous() {},
   };
-
-  return onSnap(collection(db, col), onNext, onError);
 }
 
-async function update<Col extends DbCol>(
-  col: Col,
+/**
+ * Update a data entry in the database.
+ */
+export async function update<T extends DataType>(
+  type: T,
   id: string,
-  data: Partial<OmitId<DbDoc<Col>>>
+  data: Partial<OmitId<Data<NonUnion<T>>>>
 ): Promise<void> {
-  if (col === "user") {
-    const user = data as Partial<OmitId<DbDoc<"user">>>;
-    if (user.role === "GUEST") {
+  const docRef = doc(db, type, id);
+
+  if (type === "user") {
+    const { role } = data as Partial<OmitId<Data<"user">>>;
+
+    if (!role) {
+      // this prevents updating users who do not exist in our db, which are GUEST users
+      return;
+    }
+
+    if (role === "GUEST") {
       // we don't store GUEST in database (user is GUEST if not in db)
-      await deleteDoc(doc(db, col, id));
+      await deleteDoc(docRef);
       return;
     }
-    if (!user.role) {
-      // prevent updating GUEST users, which do not exist in our db
-      return;
-    }
+
+    await setDoc(docRef, data, { merge: true });
+    return;
   }
-  await updateDoc(doc(db, col, id), data);
+
+  await updateDoc(docRef, data as object);
 }
 
-async function del<Col extends DbCol>(col: Col, id: string): Promise<void> {
-  await deleteDoc(doc(db, col, id));
-}
+/**
+ * Delete a data entry in the database.
+ */
+export async function del<T extends DataType>(
+  type: T,
+  id: string
+): Promise<void> {
+  await runTransaction(db, async (transaction) => {
+    const docRef = doc(db, type, id);
+    const snap = await transaction.get(docRef);
 
-export { add, set, get, onSnapshot, update, del };
+    if (!snap.exists()) {
+      throw new Error(`Data with this id does not exist: ${id}`);
+    }
+
+    const metadataRef = doc(db, "--metadata--", type);
+
+    transaction
+      .delete(docRef) // delete doc
+      .set(metadataRef, { count: increment(-1) }, { merge: true }); // decrement counter
+  });
+}
