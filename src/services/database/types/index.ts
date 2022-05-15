@@ -70,8 +70,8 @@ export interface Achievement {
 // RichText
 export type RichText = object;
 
-// Helper types
-type _Db = {
+// Database
+type Database = {
   ["user"]: User;
   ["event"]: RecEvent;
   ["workshop"]: Workshop;
@@ -82,7 +82,15 @@ type _Db = {
   ["achievement"]: Achievement;
 };
 
-export type DbCol = keyof _Db;
-export type DbDoc<T extends DbCol> = _Db[T];
+export type DataType = keyof Database;
+export type Data<T extends DataType> = Database[T];
+export type OmitId<T extends Data<DataType>> = T extends any
+  ? Omit<T, "id">
+  : never;
 
-export type OmitId<T extends DbDoc<DbCol>> = Omit<T, "id">;
+export interface DataBatchReader<T extends DataType> {
+  readonly type: T;
+  getCount(): Promise<number>;
+  next(count: number): Promise<Data<T>[]>;
+  previous(count: number): Promise<Data<T>[]>;
+}
