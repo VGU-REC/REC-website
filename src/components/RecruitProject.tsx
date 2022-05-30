@@ -5,18 +5,18 @@ import Pagination from './Pagination';
 function RecruitProject() {
   return (
     <div>
-      <Carousel/>
+      <Carousel />
       <div className="grid grid-cols-1 divide-black divide-y-4">
         <div>
           <h1 className='text-xl p-3 font-bold'>RECRUIT PROJECT</h1>
         </div>
         <div className='p-3'>
-          <Card/>
-          <Card/>
-          <Card/>
+          <Card />
+          <Card />
+          <Card />
+        </div>
       </div>
-      </div>
-      <Pagination/>
+      <Pagination />
     </div>
   );
 }
