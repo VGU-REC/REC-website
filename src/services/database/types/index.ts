@@ -1,3 +1,5 @@
+import { NonUnion } from "types";
+
 // User
 export interface User {
   id: string;
@@ -88,9 +90,28 @@ export type OmitId<T extends Data<DataType>> = T extends any
   ? Omit<T, "id">
   : never;
 
-export interface DataBatchReader<T extends DataType> {
-  readonly type: T;
-  getCount(): Promise<number>;
-  next(count: number): Promise<Data<T>[]>;
-  previous(count: number): Promise<Data<T>[]>;
+export interface DataPageGetter<T extends DataType> {
+  (n: number): Promise<Data<T>[]>;
 }
+
+interface IDataPaginationOptions<T extends DataType> {
+  itemsPerPage: number;
+  orderBy?: keyof OmitId<Data<T>> | (keyof OmitId<Data<T>>)[];
+  cachedPageCount?: number;
+  preloadedPageCount?: number;
+}
+
+export type DataPaginationOptions<T extends DataType> = [T] extends [
+  NonUnion<T>
+]
+  ? IDataPaginationOptions<T>
+  : never;
+
+interface IDataPagination<T extends DataType> {
+  pageCount: number;
+  getPage: DataPageGetter<T>;
+}
+
+export type DataPagination<T extends DataType> = [T] extends [NonUnion<T>]
+  ? IDataPagination<T>
+  : never;

@@ -1,21 +1,23 @@
-import { DataType, Data, OmitId, DataBatchReader } from "./types";
+import {
+  DataType,
+  Data,
+  OmitId,
+  DataPageGetter,
+  DataPaginationOptions,
+  DataPagination,
+} from "./types";
 import { Optional, NonUnion } from "types";
 import { db } from "./firestore";
 import {
-  addDoc,
   collection,
   doc,
   getDoc,
   getDocs,
   setDoc,
-  onSnapshot as onSnap,
-  QuerySnapshot,
-  DocumentSnapshot,
   updateDoc,
   deleteDoc,
   increment,
   runTransaction,
-  DocumentReference,
 } from "firebase/firestore";
 
 export * from "./types";
@@ -72,26 +74,38 @@ export async function get<T extends DataType>(
 }
 
 /**
- * Create a data batch reader for data pagination.
+ * Get the total entry count of a data type in the database.
  */
-export function createBatchReader<T extends DataType>(
-  type: T
-): DataBatchReader<NonUnion<T>> {
+export async function getCount(type: DataType): Promise<number> {
+  const metadataRef = doc(db, "--metadata--", type);
+  const metadata = await getDoc(metadataRef);
+  return Number(metadata.get("count") ?? 0);
+}
+
+/**
+ * Create a data pagination object for getting pages of data.
+ */
+export async function createDataPagination<T extends DataType>(
+  type: T,
+  options: DataPaginationOptions<T>
+): Promise<DataPagination<T>> {
+  const {
+    itemsPerPage,
+    cachedPageCount = 0,
+    orderBy,
+    preloadedPageCount = 0,
+  } = options;
+
+  const pageCount = await getCount(type);
+
+  const cache: Data<NonUnion<T>>[][] = [];
+
   return {
-    type: type as NonUnion<T>,
-
-    async getCount() {
-      const metadataRef = doc(db, "--metadata--", this.type);
-      const metadata = await getDoc(metadataRef);
-      return metadata.get("count") ?? 0;
+    pageCount,
+    async getPage(n: number): Promise<Data<T>[]> {
+      return [];
     },
-
-    async next(count) {
-      const colRef = collection(db, type);
-    },
-
-    async previous() {},
-  };
+  } as DataPagination<T>;
 }
 
 /**
@@ -104,25 +118,27 @@ export async function update<T extends DataType>(
 ): Promise<void> {
   const docRef = doc(db, type, id);
 
-  if (type === "user") {
-    const { role } = data as Partial<OmitId<Data<"user">>>;
-
-    if (!role) {
-      // this prevents updating users who do not exist in our db, which are GUEST users
-      return;
-    }
-
-    if (role === "GUEST") {
-      // we don't store GUEST in database (user is GUEST if not in db)
-      await deleteDoc(docRef);
-      return;
-    }
-
-    await setDoc(docRef, data, { merge: true });
+  if (type !== "user") {
+    await updateDoc(docRef, data as object);
     return;
   }
 
-  await updateDoc(docRef, data as object);
+  // User
+
+  const { role } = data as Partial<OmitId<Data<"user">>>;
+
+  if (!role) {
+    // this prevents updating users who do not exist in our db, which are GUEST users
+    return;
+  }
+
+  if (role === "GUEST") {
+    // we don't store GUEST in database (user is GUEST if not in db)
+    await deleteDoc(docRef);
+    return;
+  }
+
+  await setDoc(docRef, data, { merge: true });
 }
 
 /**
