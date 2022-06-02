@@ -1,32 +1,35 @@
-import About from 'components/About';
-import Achievement from 'components/Achievement';
-import Activity from 'components/Activity';
-import Blog from 'components/Blog';
-import Footer from 'components/Footer';
-import Home from 'components/Home';
-import Navbar from 'components/Navbar';
-import Pagination from 'components/Pagination';
-import Project from 'components/Project';
-import React from 'react';
+import { Footer, Navbar, NewProject } from 'components';
+import { About, Home, Activities, Projects, Blogs, Achievements } from 'pages';
 import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
+
 function App() {
   return (
     <div>
       <Router>
         <Navbar />
         <Routes>
-          <Route path="/" element={<Home />}>
-            <Route path="about" element={<About />} />
-            <Route path="activity" element={<Activity />} />
-            <Route path="project" element={<Project />} />
-            <Route path="blog" element={<Blog />} />
-            <Route path="achievement" element={<Achievement />} />
-          </Route>
+          <Route path="/" element={<Home />} />
+          <Route path="about" element={<About />} />
+          <Route path="activity" element={<Activities />} />
+          <Route path="activity/:id" element={<></>} />
+          <Route path="project" element={<Projects />} />
+          <Route path="project/past" element={<></>} />
+          <Route path="project/past/:id" element={<></>} />
+          <Route path="project/recruiting" element={<></>} />
+          <Route path="project/:id" element={<></>} />
+          <Route path="project/new" element={<NewProject />} />
+          {/* Pending + recruiting */}
+          <Route path="project/idea" element={<></>} />
+          <Route path="project/idea/:id" element={<></>} />
+
+          <Route path="blog" element={<Blogs />} />
+          <Route path="blog/:id" element={<></>} />
+
+          <Route path="achievement" element={<Achievements />} />
         </Routes>
         <Footer />
-        <About />
       </Router>
-    </div>
+    </div >
   );
 }
 

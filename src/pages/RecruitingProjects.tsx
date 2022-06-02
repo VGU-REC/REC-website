@@ -1,14 +1,12 @@
-import React from 'react';
-import Card from './Card';
-import Carousel from './Carousel';
-import Pagination from './Pagination';
-function Idea() {
+import { Card, Carousel, Pagination } from 'components';
+
+function RecruitingProjects() {
   return (
     <div>
       <Carousel />
       <div className="grid grid-cols-1 divide-black divide-y-4">
         <div>
-          <h1 className='text-xl p-3 font-bold'>BLOG</h1>
+          <h1 className='text-xl p-3 font-bold'>RECRUIT PROJECT</h1>
         </div>
         <div className='p-3'>
           <Card />
@@ -21,4 +19,4 @@ function Idea() {
   );
 }
 
-export default Idea;
+export { RecruitingProjects };

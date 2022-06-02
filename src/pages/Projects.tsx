@@ -1,8 +1,6 @@
-import React from 'react';
-import Carousel from './Carousel';
-import Card from './Card';
-import CardNoImage from './CardNoImage';
-function Project() {
+import { Card, Carousel, CardNoImage } from 'components';
+
+function Projects() {
   return (
     <div className='bg-gray-200'>
       <div className='grid grid-cols-2'>
@@ -69,4 +67,4 @@ function Project() {
   );
 }
 
-export default Project;
+export { Projects };

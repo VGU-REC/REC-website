@@ -16,4 +16,4 @@ const CardNoImage: FC = () => {
   );
 }
 
-export default CardNoImage;
+export { CardNoImage };
