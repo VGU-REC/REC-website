@@ -8,22 +8,24 @@ import Navbar from 'components/Navbar';
 import Pagination from 'components/Pagination';
 import Project from 'components/Project';
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
 function App() {
   return (
     <div>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />}>
-          <Route path="about" element={<About />} />
-          <Route path="activity" element={<Activity />} />
-          <Route path="project" element={<Project />} />
-          <Route path="blog" element={<Blog />} />
-          <Route path="achievement" element={<Achievement />} />
-        </Route>
-      </Routes>
-      <Footer />
-      <About />
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />}>
+            <Route path="about" element={<About />} />
+            <Route path="activity" element={<Activity />} />
+            <Route path="project" element={<Project />} />
+            <Route path="blog" element={<Blog />} />
+            <Route path="achievement" element={<Achievement />} />
+          </Route>
+        </Routes>
+        <Footer />
+        <About />
+      </Router>
     </div>
   );
 }
