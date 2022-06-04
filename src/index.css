@@ -11,3 +11,14 @@
 .header2 {
     background-color: rgba(0, 0, 0, 0.75);
 }
+
+.logo {
+    height: 100px;
+    width: 120px;
+}
+
+.lg {
+    height: 20px;
+    width: 30px;
+    margin: 3px;
+}

@@ -30,7 +30,6 @@ function App() {
         <Footer />
       </Router>
     </div >
->>>>>>> bf6d9a516f70a366e24724a6914672c56811d889
   );
 }
 
