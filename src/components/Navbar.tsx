@@ -10,7 +10,7 @@ function Navbar() {
                   <img className="logo" src="logo.png" alt="Logo" />
           </div>
 
-          <div className="flex justify-end ml-0 mr-7 mt-9">
+          <div className="flex justify-end ml-0 mr-7 mt-8">
               <ul className="flex flex-row">
                 <li className="px-3 uppercase">Home</li>
                 <li className="px-3 uppercase">Activy</li>
@@ -24,7 +24,7 @@ function Navbar() {
 
           <div className="pl-3 pr-7">
             <div>
-              <div className="flex justify-end mt-7">
+              <div className="flex justify-end mt-6">
                 <div className="flex justify-center">
                   <div className="mb-2 xl:w-96">
                     <div className="input-group relative flex flex-wrap items-stretch w-full mb-4 rounded">
