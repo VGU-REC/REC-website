@@ -1,5 +1,5 @@
 import { Footer, Navbar, NewProject } from 'components';
-import { About, Home, Activities, Projects, Blogs, Achievements } from 'pages';
+import { About, Home, Activities, Projects, Blogs, Achievements, PastProjects } from 'pages';
 import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
           <Route path="activity" element={<Activities />} />
           <Route path="activity/:id" element={<></>} />
           <Route path="project" element={<Projects />} />
-          <Route path="project/past" element={<></>} />
+          <Route path="project/past" element={<PastProjects/>} />
           <Route path="project/past/:id" element={<></>} />
           <Route path="project/recruiting" element={<></>} />
           <Route path="project/:id" element={<></>} />

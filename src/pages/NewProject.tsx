@@ -1,54 +1,43 @@
 function NewProject() {
   return (
-    <div className='pform'>
-      <h1 className='underline'>RECRUIT FORM</h1>
-      <h4>Amet minim mollit non deserunt ullamco est sit aliquatgo dolor do amet sint. Velit officia consequat Amet minimuu mollit non deserunt ullamco.</h4>
-      <form className='form'>
-        <div>
-          <div className='grid grid-cols-2'>
-            <div className='col-span-1'>
-              <label className='pr-2'>Name:</label>
-              <input type="text" />
-            </div>
-            <div className='col-span-1'>
-              <label >Student ID:</label>
-              <input type="text" />
-            </div>
+    <div>
+      <form className="m-3">
+        <h1 className='pt-3 text-2xl text-center'>RECRUIT FORM</h1>
+        <h4 className="container text-center">Amet minim mollit non deserunt ullamco est sit aliquatgo dolor do amet sint.<br/> Velit officia consequat Amet minimuu mollit non deserunt ullamco.</h4>
+        <div className="flex flex-col justify-center items-center">
+          <div className='grid grid-cols-2 gap-2 w-96 pt-2'>
+              <div className="flex flex-col justify-start">
+                <label className='px-2'>Name:</label>
+                <input className="border px-2 border-black" type="text"/>
+              </div>
+              <div className="flex flex-col justify-start">
+                <label className="px-2">Student ID:</label>
+                <input className="border px-2 border-black" type="text" />
+              </div>
           </div>
-          <div className='grid grid-cols-1'>
-            <div className='col-span-1'>
-              <label>Facebook link:</label>
-              <input type="text" />
-            </div>
+          <div className='grid grid-cols-1 w-96 pt-2'>
+              <label className="px-2">Facebook link:</label>
+              <input className="border border-black px-2" type="text"/>
           </div>
-          <div className='grid grid-cols-1'>
-            <div className='col-span-1'>
-              <label>Phone number:</label>
-              <input type="text" />
-            </div>
+          <div className='grid grid-cols-1 w-96 pt-2'>
+              <label className="px-2">Phone number:</label>
+              <input className="border border-black px-2" type="text" />
           </div>
-          <div className='grid grid-cols-1'>
-            <div className='col-span-1'>
-              <label>Short introduction about yourself:</label>
-              <textarea></textarea>
-            </div>
+          <div className='grid grid-cols-1 w-96 pt-2'>
+              <label className="px-2">Short introduction about yourself:</label>
+              <textarea className="border border-black px-2" cols={5}/>
           </div>
-          <div className='grid grid-cols-1'>
-            <div className='col-span-1'>
-              <label>Short introduction about your project:</label>
-              <textarea></textarea>
-            </div>
+          <div className='grid grid-cols-1 w-96 pt-2'>
+              <label className="px-2">Short introduction about your project:</label>
+              <textarea className="border border-black px-2"/>
           </div>
-          <div className='grid grid-cols-1'>
-            <div className='col-span-1'>
-              <label>Number of members required:</label>
-              <input type="text" />
-            </div>
+          
+          <div className='flex flex-row pt-2 w-96'>
+              <label className="px-2">Number of members required:</label>
+              <input className="border border-black px-2 w-1/4" type="text" />
           </div>
-          <div className='grid grid-cols-1 gap-4'>
-            <div>
-              <button>Submit</button>
-            </div>
+          <div className="w-96 pt-2">
+              <button className="bg-black border-black text-white w-full py-2">Submit</button>
           </div>
         </div>
       </form>

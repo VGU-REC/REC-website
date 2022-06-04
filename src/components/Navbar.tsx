@@ -7,10 +7,10 @@ function Navbar() {
         ">
         <div className="grid grid-cols-3">
           <div className="pl-7">
-                  <img className="logo" src="logo.png" alt="Logo" />
+                  <img className="logo" src="/logo.png" alt="Logo" />
           </div>
 
-          <div className="flex justify-end ml-0 mr-7 mt-8">
+          <div className="flex justify-end ml-0 mr-7 mt-9">
               <ul className="flex flex-row">
                 <li className="px-3 uppercase">Home</li>
                 <li className="px-3 uppercase">Activy</li>
@@ -37,8 +37,8 @@ function Navbar() {
                     </div>
                   </div>
                   <div className="flex flex-row mt-2">
-                    <img className="lg" src="en.png" alt="English" />
-                    <img className="lg" src="de.png" alt="Deutsch" />
+                    <img className="lg" src="/en.png" alt="English" />
+                    <img className="lg" src="/de.png" alt="Deutsch" />
                   </div>
                 </div>
               </div>
