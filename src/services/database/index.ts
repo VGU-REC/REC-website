@@ -18,6 +18,9 @@ import {
   deleteDoc,
   increment,
   runTransaction,
+  query,
+  limit,
+  orderBy,
 } from "firebase/firestore";
 
 export * from "./types";
@@ -92,19 +95,34 @@ export async function createDataPagination<T extends DataType>(
   const {
     itemsPerPage,
     cachedPageCount = 0,
-    orderBy,
+    orderBy: _orderBy = [],
     preloadedPageCount = 0,
   } = options;
 
-  const pageCount = await getCount(type);
+  const totalItemCount = await getCount(type);
+  const pageCount = Math.ceil(totalItemCount / itemsPerPage);
 
-  const cache: Data<NonUnion<T>>[][] = [];
+  const baseQuery = (() => {
+    const orderByList =
+      typeof _orderBy === "string"
+        ? [orderBy(_orderBy)]
+        : (_orderBy as string[]).map((s) => orderBy(s));
+    return query(collection(db, type), ...orderByList);
+  })();
+
+  const cache = {
+    startAt: 0,
+    cachedPages: [] as Data<T>[][],
+  };
+
+  const getPage = async (n: number): Promise<Data<T>[]> => {
+    return [];
+  };
 
   return {
+    totalItemCount,
     pageCount,
-    async getPage(n: number): Promise<Data<T>[]> {
-      return [];
-    },
+    getPage,
   } as DataPagination<T>;
 }
 

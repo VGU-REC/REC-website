@@ -108,6 +108,7 @@ export type DataPaginationOptions<T extends DataType> = [T] extends [
   : never;
 
 interface IDataPagination<T extends DataType> {
+  totalItemCount: number;
   pageCount: number;
   getPage: DataPageGetter<T>;
 }
