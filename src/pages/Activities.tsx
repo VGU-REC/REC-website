@@ -1,10 +1,9 @@
-import React from 'react';
-import Carousel from './Carousel';
-import Pagination from './Pagination';
-function Activity() {
+import { Carousel, Pagination } from 'components';
+
+function Activities() {
   return (
     <div>
-      <Carousel/>
+      <Carousel />
       <div className="grid grid-cols-1 divide-black divide-y-4">
         <div>
           <h1 className='text-xl p-3 font-bold'>ACTIVITY</h1>
@@ -45,11 +44,11 @@ function Activity() {
               </div>
             </div>
           </div>
+        </div>
       </div>
-      </div>
-      <Pagination/>
+      <Pagination />
     </div>
   );
 }
 
-export default Activity;
+export { Activities };
