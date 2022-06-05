@@ -1,5 +1,3 @@
-import { Card, Carousel } from 'components';
-
 function Achievements() {
   return (
     <div>
@@ -14,9 +12,7 @@ function Achievements() {
         </div>
       </div>
 
-      <Card />
-
-      <Carousel />
+      
 
     </div>
   );
