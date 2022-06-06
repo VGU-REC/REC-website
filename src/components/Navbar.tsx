@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 function Navbar() {
   return (
     <div>
@@ -7,17 +8,31 @@ function Navbar() {
         ">
         <div className="grid grid-cols-3">
           <div className="pl-7">
-                  <img className="logo" src="/logo.png" alt="Logo" />
+            <Link to="/">
+              <img className="logo" src="/logo.png" alt="Logo" />
+            </Link>
           </div>
 
           <div className="flex justify-end ml-0 mr-7 mt-9">
               <ul className="flex flex-row">
-                <li className="px-3 uppercase">Home</li>
-                <li className="px-3 uppercase">Activy</li>
-                <li className="px-3 uppercase">Project</li>
-                <li className="px-3 uppercase">Blog</li>
-                <li className="px-3 uppercase">Achievement</li>
-                <li className="px-3 uppercase">About</li>
+                <Link to="/">
+                  <li className="px-3 uppercase">Home</li>
+                </Link>
+                <Link to="/activity">
+                  <li className="px-3 uppercase">Activy</li>
+                </Link>
+                <Link to="project">
+                  <li className="px-3 uppercase">Project</li>
+                </Link>
+                <Link to="/blog">
+                  <li className="px-3 uppercase">Blog</li>
+                </Link>
+                <Link to="achievement">
+                  <li className="px-3 uppercase">Achievement</li>
+                </Link>
+                <Link to="about">
+                  <li className="px-3 uppercase">About</li>
+                </Link>
                 <li className="px-3 uppercase text-orange-500 flex-shrink-0">Sign in</li>
               </ul>
           </div>
