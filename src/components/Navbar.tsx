@@ -38,7 +38,7 @@ function Navbar() {
                   </div>
                   <div className="flex flex-row mt-2">
                     <img className="lg" src="/en.png" alt="English" />
-                    <img className="lg" src="/de.png" alt="Deutsch" />
+                    <img className="lg" src="/vn.png" alt="Deutsch" />
                   </div>
                 </div>
               </div>
