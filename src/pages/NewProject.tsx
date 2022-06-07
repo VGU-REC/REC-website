@@ -7,16 +7,6 @@ function NewProject() {
           <h1 className='pt-3 text-2xl text-center'>RECRUIT FORM</h1>
           <h4 className="container text-center">Amet minim mollit non deserunt ullamco est sit aliquatgo dolor do amet sint.<br/> Velit officia consequat Amet minimuu mollit non deserunt ullamco.</h4>
           <div className="flex flex-col justify-center items-center">
-            <div className='grid grid-cols-2 gap-2 w-96 pt-2'>
-                <div className="flex flex-col justify-start">
-                  <label className='px-2'>Name:</label>
-                  <input className="border px-2 border-black" type="text"/>
-                </div>
-                <div className="flex flex-col justify-start">
-                  <label className="px-2">Student ID:</label>
-                  <input className="border px-2 border-black" type="text" />
-                </div>
-            </div>
             <div className='grid grid-cols-1 w-96 pt-2'>
                 <label className="px-2">Facebook link:</label>
                 <input className="border border-black px-2" type="text"/>
