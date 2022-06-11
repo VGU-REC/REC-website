@@ -1,4 +1,4 @@
-import { Card, Carousel, CardNoImage } from 'components';
+import { Card, Carousel, CardNoImage, CarouselMultipleItems } from 'components';
 
 function Projects() {
   return (
@@ -21,17 +21,7 @@ function Projects() {
           <h1 className='text-xl p-3 font-bold'>PENDING PROJECT</h1>
         </div>
         <div>
-          <div className='grid grid-cols-3 p-3'>
-            <div className='cols-1'>
-              <CardNoImage headline='Headline' description="Some quick example text to build on the card title and make up the bulk of the card's content."/>
-            </div>
-            <div className='cols-2'>
-              <CardNoImage headline='Headline' description="Some quick example text to build on the card title and make up the bulk of the card's content."/>
-            </div>
-            <div className='cols-3'>
-              <CardNoImage headline='Headline' description="Some quick example text to build on the card title and make up the bulk of the card's content."/>
-            </div>
-          </div>
+          <CarouselMultipleItems/>
           <h1 className='text-xl p-3 font-bold'>RECRUIT PROJECT</h1>
         </div>
         <div>

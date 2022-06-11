@@ -6,7 +6,7 @@ interface content {
 function CardNoImage({headline, description}: content) {
   return (
     <div>
-      <div className="flex justify-center p-3">
+      <div className="flex justify-center ">
         <div className="block p-6 rounded-lg shadow-lg bg-white max-w-sm">
           <h5 className="text-gray-900 text-xl leading-tight font-medium mb-2">{headline}</h5>
           <p className="text-gray-700 text-base mb-2">

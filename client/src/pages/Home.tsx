@@ -16,9 +16,15 @@ function Home() {
               <Card image='img3.jpg' alt='Image' headline='Headline' description='This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.'/>
             </div>
             <div className='cols-2'>
-              <CardNoImage headline='Headline' description="Some quick example text to build on the card title and make up the bulk of the card's content."/>
-              <CardNoImage headline='Headline' description="Some quick example text to build on the card title and make up the bulk of the card's content."/>
-              <CardNoImage headline='Headline' description="Some quick example text to build on the card title and make up the bulk of the card's content."/>
+              <div className='pt-3'>
+                <CardNoImage headline='Headline' description="Some quick example text to build on the card title and make up the bulk of the card's content."/>
+              </div>
+              <div className='pt-3'>
+                <CardNoImage headline='Headline' description="Some quick example text to build on the card title and make up the bulk of the card's content."/>
+              </div>
+              <div className='pt-3'>
+                <CardNoImage headline='Headline' description="Some quick example text to build on the card title and make up the bulk of the card's content."/>
+              </div>
             </div>
           </div>
 
