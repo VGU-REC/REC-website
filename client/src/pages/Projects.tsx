@@ -1,4 +1,4 @@
-import { Card, Carousel, CardNoImage, CarouselMultipleItems } from 'components';
+import { Card, Carousel, CardNoImage, CarouselMultipleItems} from 'components';
 import {Link} from "react-router-dom";
 
 function Projects() {
