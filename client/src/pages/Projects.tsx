@@ -28,7 +28,7 @@ function Projects() {
           <h1 className='text-xl p-3 font-bold'>PENDING PROJECT</h1>
         </div>
         <div>
-          <CarouselMultipleItems/>
+          <CarouselMultipleItems show={3}/>
           <Link to="/project/recruiting"><h1 className='text-xl p-3 font-bold hover:text-orange-600'>RECRUIT PROJECT</h1></Link>
         </div>
         <div>

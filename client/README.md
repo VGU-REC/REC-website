@@ -46,3 +46,5 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 To learn React, check out the [React documentation](https://reactjs.org/).
 
 "build-css": "npx tailwindcss -i ./src/styles.css -o ./src/index.css --watch"
+
+Carousel: https://github.com/rakumairu/simple-react-carousel/tree/part-3
