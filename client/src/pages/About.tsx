@@ -29,12 +29,6 @@ function About() {
           <div>
             <Avatar />
           </div>
-          <div>
-            <Avatar />
-          </div>
-          <div>
-            <Avatar />
-          </div>
         </div>
       </div>
 

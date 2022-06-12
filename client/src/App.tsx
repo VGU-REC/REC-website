@@ -1,5 +1,5 @@
 import { Footer, Navbar, NewProject } from 'components';
-import { About, Home, Activities, Projects, Blogs, Achievements, PastProjects } from 'pages';
+import { About, Home, Activities, Projects, Blogs, Achievements, PastProjects, ProjectIdeas, RecruitingProjects } from 'pages';
 import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
 
 function App() {
@@ -15,11 +15,11 @@ function App() {
           <Route path="project" element={<Projects />} />
           <Route path="project/past" element={<PastProjects/>} />
           <Route path="project/past/:id" element={<></>} />
-          <Route path="project/recruiting" element={<></>} />
+          <Route path="project/recruiting" element={<RecruitingProjects/>} />
           <Route path="project/:id" element={<></>} />
           <Route path="project/new" element={<NewProject />} />
           {/* Pending + recruiting */}
-          <Route path="project/idea" element={<></>} />
+          <Route path="project/idea" element={<ProjectIdeas/>} />
           <Route path="project/idea/:id" element={<></>} />
 
           <Route path="blog" element={<Blogs />} />
