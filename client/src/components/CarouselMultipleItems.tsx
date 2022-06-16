@@ -18,7 +18,6 @@ const CarouselMultipleItems: FC<Props> = ({ show, children }) => {
   useEffect(() => {
     setLength(children.length);
   }, [children]);
-  //const length = 5;
   const next = () => {
     if (currentIndex < length - show) {
       setCurrentIndex((prevState) => prevState + 1);
