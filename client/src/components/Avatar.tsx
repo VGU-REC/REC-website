@@ -1,4 +1,6 @@
-function Avatar() {
+import { FC } from "react";
+
+const Avatar: FC = () => {
   return (
     <div>
       <div className="text-center">
@@ -12,6 +14,6 @@ function Avatar() {
       </div>
     </div>
   );
-}
+};
 
 export { Avatar };

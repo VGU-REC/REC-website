@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
-function Navbar() {
+import { FC } from "react";
+
+const Navbar: FC = () => {
   return (
     <div>
       <nav
@@ -97,6 +99,6 @@ function Navbar() {
       </nav>
     </div>
   );
-}
+};
 
 export { Navbar };

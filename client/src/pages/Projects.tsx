@@ -1,7 +1,8 @@
 import { Card, Carousel, CardNoImage, CarouselMultipleItems } from "components";
 import { Link } from "react-router-dom";
+import { FC } from "react";
 
-function Projects() {
+const Projects: FC = () => {
   return (
     <div className="bg-gray-200">
       <div className="bg-white grid grid-cols-2 h-96">
@@ -157,6 +158,6 @@ function Projects() {
       </div>
     </div>
   );
-}
+};
 
 export { Projects };
