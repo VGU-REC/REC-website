@@ -19,26 +19,26 @@ const Footer: FC = () => {
 
           <div className="grid grid-cols-2 mt-8">
             <div>
-              <Link to="/" className="uppercase py-2 text-sm">
-                Home
-              </Link>
-              <Link to="activity" className="uppercase py-2 text-sm">
-                Activity
-              </Link>
-              <Link to="project" className="uppercase py-2 text-sm">
-                Project
-              </Link>
+              <div className="uppercase py-2">
+                <Link to="/">Home</Link>
+              </div>
+              <div className="uppercase py-2">
+                <Link to="activity">Activity</Link>
+              </div>
+              <div className="uppercase py-2">
+                <Link to="/project">Project</Link>
+              </div>
             </div>
             <div>
-              <Link to="blog" className="uppercase py-2 text-sm">
-                Blog
-              </Link>
-              <Link to="achievement" className="uppercase py-2 text-sm">
-                Achievement
-              </Link>
-              <Link to="about" className="uppercase py-2 text-sm">
-                About
-              </Link>
+              <div className="uppercase py-2">
+                <Link to="blog">Blog</Link>
+              </div>
+              <div className="uppercase py-2">
+                <Link to="achievement">Achievement</Link>
+              </div>
+              <div className="uppercase py-2">
+                <Link to="about">About</Link>
+              </div>
             </div>
           </div>
 
