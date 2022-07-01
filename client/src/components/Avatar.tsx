@@ -1,16 +1,24 @@
 import { FC } from "react";
 
-const Avatar: FC = () => {
+interface Props {
+  name: string;
+  position: string;
+  description: string;
+  img: string;
+}
+
+const Avatar: FC<Props> = ({ name, position, description, img }) => {
   return (
     <div>
       <div className="text-center">
         <img
-          src="https://mdbcdn.b-cdn.net/img/new/avatars/8.webp"
+          src={img}
           className="rounded-full w-32 mb-4 mx-auto"
           alt="Avatar"
         />
-        <h5 className="text-xl font-medium leading-tight mb-2">John Doe</h5>
-        <p className="text-gray-500">Web designer</p>
+        <h5 className="text-xl font-medium leading-tight mb-2">{name}</h5>
+        <p className="text-gray-500">{position}</p>
+        <p>{description}</p>
       </div>
     </div>
   );
