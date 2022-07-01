@@ -22,13 +22,13 @@ const Navbar: FC = () => {
               <Link to="/">
                 <li className="px-3 uppercase">Home</li>
               </Link>
-              <Link to="/activity">
+              <Link to="activity">
                 <li className="px-3 uppercase">Activy</li>
               </Link>
               <Link to="project">
                 <li className="px-3 uppercase">Project</li>
               </Link>
-              <Link to="/blog">
+              <Link to="blog">
                 <li className="px-3 uppercase">Blog</li>
               </Link>
               <Link to="achievement">

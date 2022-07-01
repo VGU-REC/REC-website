@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { FC } from "react";
 
 const Footer: FC = () => {
@@ -18,14 +19,26 @@ const Footer: FC = () => {
 
           <div className="grid grid-cols-2 mt-8">
             <div>
-              <div className="uppercase py-2 text-sm">Home</div>
-              <div className="uppercase py-2 text-sm">Activity</div>
-              <div className="uppercase py-2 text-sm">Project</div>
+              <Link to="/" className="uppercase py-2 text-sm">
+                Home
+              </Link>
+              <Link to="activity" className="uppercase py-2 text-sm">
+                Activity
+              </Link>
+              <Link to="project" className="uppercase py-2 text-sm">
+                Project
+              </Link>
             </div>
             <div>
-              <div className="uppercase py-2 text-sm">Blog</div>
-              <div className="uppercase py-2 text-sm">Achievement</div>
-              <div className="uppercase py-2 text-sm">About</div>
+              <Link to="blog" className="uppercase py-2 text-sm">
+                Blog
+              </Link>
+              <Link to="achievement" className="uppercase py-2 text-sm">
+                Achievement
+              </Link>
+              <Link to="about" className="uppercase py-2 text-sm">
+                About
+              </Link>
             </div>
           </div>
 
