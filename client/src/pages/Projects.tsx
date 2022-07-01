@@ -27,7 +27,7 @@ const Projects: FC = () => {
             </Link>
           </div>
         </div>
-        <div className="col-2 pt-6">
+        <div className="col-2 pt-0">
           <Carousel />
         </div>
       </div>
