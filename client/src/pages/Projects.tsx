@@ -36,7 +36,7 @@ const Projects: FC = () => {
         <div>
           <h1 className="text-xl p-3 font-bold">PENDING PROJECT</h1>
         </div>
-        <div>
+        <div className="pt-3">
           <CarouselMultipleItems show={3}>
             {[
               {
