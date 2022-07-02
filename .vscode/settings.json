@@ -16,5 +16,27 @@
   },
   "[jsonc]": {
     "editor.tabSize": 2
-  }
+  },
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 5432,
+      "driver": "PostgreSQL",
+      "username": "postgres",
+      "name": "helloworld",
+      "database": "dvdrental",
+      "password": "1234"
+    },
+    {
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 5432,
+      "driver": "PostgreSQL",
+      "name": "rec_db",
+      "username": "postgres",
+      "database": "recweb",
+      "password": "1234"
+    }
+  ]
 }
