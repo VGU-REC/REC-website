@@ -1,14 +1,17 @@
+import { createUser, getUsers, updateUser } from "../models/users";
+// import { getUsers, createUser, updateUser } from "api/models";
 import express from "express";
-
-
-const tho: string = "hello";
 const app = express();
-app.use(express.json());
-
-app.post("/users", (req, res) => {
-  
-});
-app.listen(5000, () => {
-  console.log("http://localhost:5000");
+app.listen(5001, () => {
+  console.log("http://localhost:5001");
   console.log("woooooooooo");
 });
+app.use(express.json());
+
+app.get("/users", getUsers);
+app.post("/users", createUser);
+app.put("/users/:id", updateUser);
+const test = () => {
+  console.log("testing");
+};
+export { test };
