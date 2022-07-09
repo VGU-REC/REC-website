@@ -1,6 +1,5 @@
 import { CardNoImage } from "./CardNoImage";
-import { useState, useEffect, Children, FC } from "react";
-import { JsxAttributeLike } from "typescript";
+import { useState, useEffect, FC } from "react";
 
 interface Props {
   show: number;

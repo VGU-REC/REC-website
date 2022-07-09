@@ -1,7 +1,8 @@
 import { Card, Carousel, CardNoImage, CarouselMultipleItems } from "components";
 import { Link } from "react-router-dom";
+import { FC } from "react";
 
-function Projects() {
+const Projects: FC = () => {
   return (
     <div className="bg-gray-200">
       <div className="bg-white grid grid-cols-2 h-96">
@@ -26,7 +27,7 @@ function Projects() {
             </Link>
           </div>
         </div>
-        <div className="col-2 pt-6">
+        <div className="col-2 pt-0">
           <Carousel />
         </div>
       </div>
@@ -35,7 +36,7 @@ function Projects() {
         <div>
           <h1 className="text-xl p-3 font-bold">PENDING PROJECT</h1>
         </div>
-        <div>
+        <div className="pt-3">
           <CarouselMultipleItems show={3}>
             {[
               {
@@ -157,6 +158,6 @@ function Projects() {
       </div>
     </div>
   );
-}
+};
 
 export { Projects };

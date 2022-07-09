@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
-function Navbar() {
+import { FC } from "react";
+
+const Navbar: FC = () => {
   return (
     <div>
       <nav
@@ -15,18 +17,18 @@ function Navbar() {
             </Link>
           </div>
 
-          <div className="flex justify-end ml-0 mr-7 mt-9">
+          <div className="flex justify-end ml-0 mr-7">
             <ul className="flex flex-row items-center">
               <Link to="/">
                 <li className="px-3 uppercase">Home</li>
               </Link>
-              <Link to="/activity">
+              <Link to="activity">
                 <li className="px-3 uppercase">Activy</li>
               </Link>
               <Link to="project">
                 <li className="px-3 uppercase">Project</li>
               </Link>
-              <Link to="/blog">
+              <Link to="blog">
                 <li className="px-3 uppercase">Blog</li>
               </Link>
               <Link to="achievement">
@@ -35,22 +37,22 @@ function Navbar() {
               <Link to="about">
                 <li className="px-3 uppercase">About</li>
               </Link>
-              <div className="mb-3 mt-0">
-                <button className="px-4 uppercase ">
+              <Link to="/" className="border border-white bg-orange-800 w-32">
+                <button className="px-4 uppercase">
                   <div className="inline-flex items-center">
-                    <span className="flex-shrink-0">Sign in</span>
+                    <p className="flex-shrink-0 uppercase">Sign in</p>
                     <img
                       className="w-8 h-8 m-3 inline"
                       src="google.png"
-                      alt=""
+                      alt="Sign in"
                     />
                   </div>
                 </button>
-              </div>
+              </Link>
             </ul>
           </div>
 
-          <div className="pl-3 pr-7">
+          <div className="pl-3 pr-7 mt-2">
             <div>
               <div className="flex justify-end mt-6">
                 <div className="flex justify-center">
@@ -97,6 +99,6 @@ function Navbar() {
       </nav>
     </div>
   );
-}
+};
 
 export { Navbar };
