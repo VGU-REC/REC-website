@@ -14,6 +14,9 @@
     "react-dom": "^18.1.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
+    "slate": "^0.81.1",
+    "slate-history": "^0.66.0",
+    "slate-react": "^0.81.0",
     "tw-elements": "^1.0.0-alpha12",
     "typescript": "^4.6.4",
     "web-vitals": "^2.1.4"
