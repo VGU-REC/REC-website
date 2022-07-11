@@ -1,7 +1,49 @@
--- CREATE TABLE users (
---     ID SERIAL PRIMARY KEY,
---     name VARCHAR(256),
---     email VARCHAR(40),
---     role VARCHAR(10)
+-- CREATE TABLE achievement (
+--     id SERIAL PRIMARY KEY,
+--     title VARCHAR(256),
+--     imagePath VARCHAR(256),
+--     date DATE NOT NULL
 -- )
-SELECT * FROM users ORDER BY ID ASC
+-- CREATE TABLE recEvent(
+--     id SERIAL PRIMARY KEY,
+--     title VARCHAR(256),
+--     description TEXT,
+--     imagePath VARCHAR(256),
+--     date DATE NOT NULL
+-- );
+-- CREATE TABLE workshop(
+--     id SERIAL PRIMARY KEY,
+--     title VARCHAR(256),
+--     host VARCHAR(50),
+--     description TEXT, --RICHText
+--     imagePath VARCHAR(256),
+--     date DATE NOT NULL
+-- )
+-- CREATE TABLE projectIdea (
+--     id SERIAL PRIMARY KEY,
+--     topic VARCHAR(256),
+--     description TEXT --RICHText
+-- );
+-- CREATE TABLE recruitingProject(
+--     id SERIAL PRIMARY KEY,
+--     host VARCHAR(50),
+--     hostFacebook VARCHAR(256),
+--     hostPhoneNumber VARCHAR(11),
+--     aboutSelf TEXT, --RICHText
+--     description TEXT, -- RICHText
+--     totalMember INTEGER,
+--     isPending BOOLEAN
+-- );   
+-- CREATE TABLE pastProject (
+--     id SERIAL PRIMARY KEY,
+--     title VARCHAR(256), 
+--     author VARCHAR(50), 
+--     content TEXT, --RICHText
+--     dataWritten DATE NOT NULL
+-- );
+--
+-- CREATE TABLE client(
+--     id SERIAL PRIMARY KEY,
+--     email VARCHAR(256),
+--     userRole VARCHAR(10)
+-- )
