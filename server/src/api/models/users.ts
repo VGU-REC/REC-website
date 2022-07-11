@@ -12,8 +12,7 @@ const getUsers = async (req: Request, res: Response) => {
 const createUser = async (req: Request, res: Response) => {
   try {
     const { name, email, role } = req.body;
-    if (name && email && role) {
-      console.log("not run");
+    if (!(name && email && role)) {
       throw new Error("Please insert all value");
     } else {
       console.log(name, email, role);
