@@ -4,6 +4,7 @@
 --     imagePath VARCHAR(256),
 --     date DATE NOT NULL
 -- )
+-- INSERT INTO achievement(title, imagePath, date) VALUES('Hello world', 'google.com', '2022-07-13');
 -- CREATE TABLE recEvent(
 --     id SERIAL PRIMARY KEY,
 --     title VARCHAR(256),

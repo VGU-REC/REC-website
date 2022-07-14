@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "start": "node dist/app.js",
-    "dev": "nodemon src/api/controllers/app.ts",
+    "dev": "nodemon src/api/app.ts",
     "build": "tsc"
   },
   "keywords": [],
