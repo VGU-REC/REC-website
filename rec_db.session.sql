@@ -42,7 +42,7 @@
 --     content TEXT, --RICHText
 --     dataWritten DATE NOT NULL
 -- );
---
+
 -- CREATE TABLE client(
 --     id SERIAL PRIMARY KEY,
 --     email VARCHAR(256),
