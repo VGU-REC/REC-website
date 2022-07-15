@@ -5,9 +5,9 @@ const RecruitingProjects = () => {
   return (
     <div>
       <Carousel />
-      <div className="grid grid-cols-1 divide-black divide-y-4">
+      <div className="grid grid-cols-1 divide-y-4 divide-black">
         <div>
-          <h1 className="text-xl p-3 font-bold">RECRUIT PROJECT</h1>
+          <h1 className="p-3 text-xl font-bold">RECRUIT PROJECT</h1>
         </div>
         <div className="p-3">
           <Card
@@ -30,7 +30,7 @@ const RecruitingProjects = () => {
           />
         </div>
       </div>
-      <Pagination />
+      {/* <Pagination /> */}
     </div>
   );
 };
