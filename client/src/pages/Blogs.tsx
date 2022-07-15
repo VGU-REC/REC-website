@@ -88,7 +88,6 @@ const Blogs: FC = () => {
         "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
     },
   ];
-  const [blogs, setBlogs] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const blogsPerPage = 3;
 

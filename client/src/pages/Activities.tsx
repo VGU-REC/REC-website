@@ -1,7 +1,67 @@
 import { CardNoImage, Carousel, Pagination } from "components";
-import { FC } from "react";
+import { FC, useState } from "react";
 
 const Activities: FC = () => {
+  let data = [
+    {
+      headline: "Headline",
+      description:
+        "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
+    },
+    {
+      headline: "Headline",
+      description:
+        "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
+    },
+    {
+      headline: "Headline",
+      description:
+        "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
+    },
+    {
+      headline: "Headline",
+      description:
+        "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
+    },
+    {
+      headline: "Headline",
+      description:
+        "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
+    },
+    {
+      headline: "Headline",
+      description:
+        "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
+    },
+    {
+      headline: "Headline",
+      description:
+        "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
+    },
+    {
+      headline: "Headline",
+      description:
+        "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
+    },
+    {
+      headline: "Headline",
+      description:
+        "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
+    },
+  ];
+  const [currentPage, setCurrentPage] = useState(1);
+  const blogsPerPage = 3;
+
+  //Get current Blogs
+  const indexOfLastBlog = currentPage * blogsPerPage;
+  const indexOfFirstBlog = indexOfLastBlog - blogsPerPage;
+  const currentBlogs = data.slice(indexOfFirstBlog, indexOfLastBlog);
+
+  // Change page
+  const paginate = (pagenumber: number) => {
+    setCurrentPage(pagenumber);
+  };
+
   return (
     <div>
       <Carousel />
@@ -9,24 +69,18 @@ const Activities: FC = () => {
         <div>
           <h1 className="p-3 text-xl font-bold">ACTIVITY</h1>
         </div>
-        <div className="grid gap-2 grid-row">
-          <CardNoImage
-            headline="Headline"
-            description="Some quick example text to build on the card title and make up the bulk of the card's content."
-          />
-
-          <CardNoImage
-            headline="Headline"
-            description="Some quick example text to build on the card title and make up the bulk of the card's content."
-          />
-
-          <CardNoImage
-            headline="Headline"
-            description="Some quick example text to build on the card title and make up the bulk of the card's content."
-          />
+        <div className="p-3">
+          {currentBlogs.map(({ headline, description }) => (
+            <CardNoImage headline={headline} description={description} />
+          ))}
         </div>
       </div>
-      {/* <Pagination /> */}
+      <Pagination
+        blogsPerPage={blogsPerPage}
+        totalBlogs={data.length}
+        paginate={paginate}
+        currentPage={currentPage}
+      />
     </div>
   );
 };
