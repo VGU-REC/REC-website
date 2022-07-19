@@ -5,10 +5,7 @@ const Navbar: FC = () => {
   return (
     <div>
       <nav
-        className="
-            bg-gray-900
-            text-white
-        "
+        className="text-white bg-gray-900 "
       >
         <div className="grid grid-cols-3">
           <div className="pl-7">
@@ -37,13 +34,13 @@ const Navbar: FC = () => {
               <Link to="about">
                 <li className="px-3 uppercase">About</li>
               </Link>
-              <Link to="/" className="border border-white bg-orange-800 w-32">
+              <Link to="/" className="w-32 bg-orange-800 border border-white">
                 <button className="px-4 uppercase">
                   <div className="inline-flex items-center">
                     <p className="flex-shrink-0 uppercase">Sign in</p>
                     <img
-                      className="w-8 h-8 m-3 inline"
-                      src="google.png"
+                      className="inline w-8 h-8 m-3"
+                      src="/google.png"
                       alt="Sign in"
                     />
                   </div>
@@ -52,12 +49,12 @@ const Navbar: FC = () => {
             </ul>
           </div>
 
-          <div className="pl-3 pr-7 mt-2">
+          <div className="pl-3 mt-2 pr-7">
             <div>
               <div className="flex justify-end mt-6">
                 <div className="flex justify-center">
                   <div className="xl:w-96">
-                    <div className="input-group relative flex flex-wrap items-stretch w-full mb-4 rounded">
+                    <div className="relative flex flex-wrap items-stretch w-full mb-4 rounded input-group">
                       <input
                         type="search"
                         className="form-control relative flex-auto min-w-0 block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"

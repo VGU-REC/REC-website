@@ -7,3 +7,4 @@ export * from "./Navbar";
 export * from "./Pagination";
 export * from "./CarouselMultipleItems";
 export * from "./RichTextContent";
+export * from "./CarouselSlider";
