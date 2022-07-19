@@ -1,4 +1,4 @@
-import { Footer, Navbar } from "components";
+import { Footer, Navbar, RichTextContent } from "components";
 import {
   About,
   Home,
@@ -16,6 +16,9 @@ import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
 function App() {
   return (
     <div>
+      <RichTextContent canEdit placeholder="Write something..." />
+      <hr />
+      <RichTextContent serializedContent="[]" />
       <Router>
         <Navbar />
         <Routes>
