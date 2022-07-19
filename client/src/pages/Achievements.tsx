@@ -17,42 +17,42 @@ const Achievements: FC = () => {
           </div>
         </div>
       </div>
-      <CarouselSlider show={3}>
+      <CarouselSlider show={4}>
         {[
           {
             id: 0,
             headline: "Achivement 1",
-            description:
-              "Some quick example text to build on the card title and make up the bulk of the card's content.",
+            description: "Some quick example text.",
             src: "img1.jpg",
+            alt: "alt",
           },
           {
             id: 1,
             headline: "Achivement 2",
-            description:
-              "Some quick example text to build on the card title and make up the bulk of the card's content.",
+            description: "Some quick example text.",
             src: "img2.jpg",
+            alt: "alt",
           },
           {
             id: 2,
             headline: "Achivement 3",
-            description:
-              "Some quick example text to build on the card title and make up the bulk of the card's content.",
+            description: "Some quick example text.",
             src: "img3.jpg",
+            alt: "alt",
           },
           {
             id: 3,
             headline: "Achivement 4",
-            description:
-              "Some quick example text to build on the card title and make up the bulk of the card's content.",
+            description: "Some quick example text.",
             src: "img4.jpg",
+            alt: "alt",
           },
           {
             id: 4,
             headline: "Achivement 5",
-            description:
-              "Some quick example text to build on the card title and make up the bulk of the card's content.",
+            description: "Some quick example text.",
             src: "img5.jpg",
+            alt: "alt",
           },
         ]}
       </CarouselSlider>
