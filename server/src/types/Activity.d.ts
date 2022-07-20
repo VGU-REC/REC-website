@@ -9,10 +9,6 @@ export interface RecEvent {
 }
 
 export interface Workshop {
-  id: string;
-  title: string;
   host: string;
-  description: SerializedRichText;
-  imagePaths: string[];
-  date: Date;
+  info: RecEvent;
 }
