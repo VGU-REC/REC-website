@@ -1,7 +1,7 @@
 import { FC, TextareaHTMLAttributes, useMemo } from "react";
 import { SerializedRichText } from "types";
 import { createEditor, Descendant } from "slate";
-import { Editable, Slate, withReact } from "slate-react";
+import { Editable, RenderLeafProps, Slate, withReact } from "slate-react";
 import { withHistory } from "slate-history";
 import { deserializeRichText } from "helpers";
 
@@ -27,7 +27,9 @@ const RichTextContent: FC<
             {
               text: "Uh oh! The serialized rich text data seems to be corrupted...",
               bold: true,
-              textColor: "red",
+              color: "#ff0000",
+              font: "Courier New",
+              size: 13,
             },
           ],
         },
@@ -41,8 +43,43 @@ const RichTextContent: FC<
       value={content}
       onChange={(v) => console.log(JSON.stringify(v))}
     >
-      <Editable readOnly={!canEdit} {...attributes} />
+      <Editable renderLeaf={renderLeaf} readOnly={!canEdit} {...attributes} />
     </Slate>
+  );
+};
+
+const renderLeaf = ({
+  attributes,
+  children,
+  leaf: { bold, italic, underline, strike, mode, font, size, color, bgColor },
+}: RenderLeafProps): JSX.Element => {
+  switch (mode) {
+    case "superscript":
+      children = <sup style={{ verticalAlign: "super" }}>{children}</sup>;
+      break;
+    case "subscript":
+      children = <sub style={{ verticalAlign: "sub" }}>{children}</sub>;
+      break;
+  }
+
+  return (
+    <span
+      {...attributes}
+      style={{
+        fontWeight: bold ? "bold" : "normal",
+        fontStyle: italic ? "italic" : "normal",
+        textDecoration:
+          underline || strike
+            ? `${underline ? "underline" : ""} ${strike ? "line-through" : ""}`
+            : "none",
+        fontFamily: font ?? "Arial",
+        fontSize: `${size ?? 11}pt`,
+        color: color ?? "#000000",
+        backgroundColor: bgColor ?? "transparent",
+      }}
+    >
+      {children}
+    </span>
   );
 };
 

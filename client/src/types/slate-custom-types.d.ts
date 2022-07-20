@@ -1,6 +1,7 @@
 import { BaseEditor, Descendant } from "slate";
 import { HistoryEditor } from "slate-history";
 import { ReactEditor } from "slate-react";
+import { Property } from "csstype";
 
 export type ParagraphElement = {
   type: "paragraph";
@@ -16,12 +17,12 @@ export type CustomText = {
   bold?: boolean;
   italic?: boolean;
   underline?: boolean;
-  strikethrough?: boolean;
+  strike?: boolean;
   mode?: "superscript" | "subscript";
-  font?: string;
-  fontSize?: number;
-  textColor?: string;
-  highlightColor?: string;
+  font?: Property.FontFamily;
+  size?: number;
+  color?: Property.Color;
+  bgColor?: Property.BackgroundColor;
 };
 
 export type CustomEditor = BaseEditor & ReactEditor & HistoryEditor;
