@@ -2,6 +2,8 @@ import { DataSource } from "typeorm";
 import { AchievementEntity } from "../api/entities/achievement";
 import "reflect-metadata";
 import { RecEventEntity, WorkshopEntity } from "../api/entities/activity";
+import { UserEntity } from "../api/entities/user";
+import { BlogEntity } from "../api/entities/blog";
 export const AppDataSource = new DataSource({
   type: "postgres",
   host: "localhost",
@@ -9,9 +11,9 @@ export const AppDataSource = new DataSource({
   username: "postgres",
   password: "1234",
   database: "recweb",
-  logging: true,
+  logging: false,
   synchronize: true, //in development and debug ok but not for production!!
-  entities: [AchievementEntity, RecEventEntity, WorkshopEntity],
+  entities: [AchievementEntity, RecEventEntity, WorkshopEntity, UserEntity, BlogEntity],
 });
 
 AppDataSource.initialize()
