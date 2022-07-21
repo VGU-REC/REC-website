@@ -4,15 +4,21 @@ import { createEditor, Descendant } from "slate";
 import { Editable, RenderLeafProps, Slate, withReact } from "slate-react";
 import { withHistory } from "slate-history";
 import { deserializeRichText } from "helpers";
+import { Toolbar } from "./Toolbar";
 
-interface Props {
+const DEFAULT_FONT = "Arial";
+const DEFAULT_FONT_SIZE = 11;
+
+type Props = {
   serializedContent?: SerializedRichText;
   canEdit?: boolean;
-}
+} & Omit<TextareaHTMLAttributes<HTMLDivElement>, "readOnly">;
 
-const RichTextContent: FC<
-  Props & Omit<TextareaHTMLAttributes<HTMLDivElement>, "readOnly">
-> = ({ serializedContent, canEdit, ...attributes }) => {
+const RichTextContent: FC<Props> = ({
+  serializedContent,
+  canEdit,
+  ...attributes
+}) => {
   const editor = useMemo(() => withReact(withHistory(createEditor())), []);
   const content = useMemo<Descendant[]>(() => {
     if (!serializedContent) {
@@ -43,6 +49,7 @@ const RichTextContent: FC<
       value={content}
       onChange={(v) => console.log(JSON.stringify(v))}
     >
+      {canEdit && <Toolbar />}
       <Editable renderLeaf={renderLeaf} readOnly={!canEdit} {...attributes} />
     </Slate>
   );
@@ -51,13 +58,13 @@ const RichTextContent: FC<
 const renderLeaf = ({
   attributes,
   children,
-  leaf: { bold, italic, underline, strike, mode, font, size, color, bgColor },
+  leaf: { bold, italic, underline, strike, align, font, size, color, bgColor },
 }: RenderLeafProps): JSX.Element => {
-  switch (mode) {
-    case "superscript":
+  switch (align) {
+    case "super":
       children = <sup style={{ verticalAlign: "super" }}>{children}</sup>;
       break;
-    case "subscript":
+    case "sub":
       children = <sub style={{ verticalAlign: "sub" }}>{children}</sub>;
       break;
   }
@@ -72,8 +79,8 @@ const renderLeaf = ({
           underline || strike
             ? `${underline ? "underline" : ""} ${strike ? "line-through" : ""}`
             : "none",
-        fontFamily: font ?? "Arial",
-        fontSize: `${size ?? 11}pt`,
+        fontFamily: font ?? DEFAULT_FONT,
+        fontSize: `${size ?? DEFAULT_FONT_SIZE}pt`,
         color: color ?? "#000000",
         backgroundColor: bgColor ?? "transparent",
       }}

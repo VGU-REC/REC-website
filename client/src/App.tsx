@@ -38,11 +38,11 @@ const content: Descendant[] = [
   },
   {
     type: "paragraph",
-    children: [{ text: "superscript", mode: "superscript" }],
+    children: [{ text: "superscript", align: "super" }],
   },
   {
     type: "paragraph",
-    children: [{ text: "subscript", mode: "subscript" }],
+    children: [{ text: "subscript", align: "sub" }],
   },
   {
     type: "paragraph",

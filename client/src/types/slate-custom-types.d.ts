@@ -18,7 +18,7 @@ export type CustomText = {
   italic?: boolean;
   underline?: boolean;
   strike?: boolean;
-  mode?: "superscript" | "subscript";
+  align?: "super" | "sub";
   font?: Property.FontFamily;
   size?: number;
   color?: Property.Color;

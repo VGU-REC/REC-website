@@ -8,3 +8,4 @@ export * from "./Pagination";
 export * from "./CarouselMultipleItems";
 export * from "./RichTextContent";
 export * from "./CarouselSlider";
+export * from "./Icon";
