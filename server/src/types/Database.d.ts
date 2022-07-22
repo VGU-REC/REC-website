@@ -9,12 +9,13 @@ import {
   User,
 } from "./types";
 
-export type Database =
-  | Achievement
-  | Workshop
-  | RecEvent
-  | Blog
-  | ProjectIdea
-  | RecruitingProject
-  | PastProject
-  | User;
+export type Database = {
+  achievement: Achievement,
+  users: User,
+  blog: Blog,
+  "rec-event": RecEvent,
+  "work-shop": Workshop,
+};
+export type DataType = keyof Database;
+export type Data<T extends DataType> = Database[T];
+const hello : Data<"achievement"> 

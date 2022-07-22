@@ -14,6 +14,11 @@ export const BlogEntity = new EntitySchema<Blog>({
       length: 256,
       nullable: false,
     },
+    author: {
+      type: "varchar",
+      length: 256,
+      nullable: false,
+    },
     content: {
       type: "text",
       nullable: false,

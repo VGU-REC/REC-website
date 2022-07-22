@@ -1,14 +1,13 @@
 import { SerializedRichText } from "./SerializedRichText";
 
 export interface RecEvent {
-  id: string;
+  id?: string;
   title: string;
   description: SerializedRichText;
   imagePaths: string[];
   date: Date;
 }
 
-export interface Workshop {
+export interface Workshop extends RecEvent {
   host: string;
-  info: RecEvent;
 }

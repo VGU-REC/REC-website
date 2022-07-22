@@ -2,8 +2,7 @@ import { EntitySchema } from "typeorm";
 import { User, UserRole } from "../../types";
 
 export const UserEntity = new EntitySchema<User>({
-  name: "blog",
-
+  name: "users",
   columns: {
     id: {
       type: "int",

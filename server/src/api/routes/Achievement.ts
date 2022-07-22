@@ -1,9 +1,16 @@
-// import { createNewAchievement, getAchievementbyID } from "../../api/controllers/achievement";
-// import express from "express";
+import { getbyID } from "../services/crud";
+import express from "express";
+import {
+  createAchievement,
+  deleteAchievement,
+  getAchievement,
+  updateAchievement,
+} from "../controllers/achievement";
 
-// const router = express.Router();
+const router = express.Router();
 
-// router.get("/:id", getAchievementbyID);
-// router.post("/", createNewAchievement);
-// // router.post("/")
-// export { router as routerAchievement };
+router.get("/:id", getAchievement);
+router.post("/", createAchievement);
+router.put("/:id", updateAchievement);
+router.delete("/:id", deleteAchievement);
+export { router as routerAchievement };
