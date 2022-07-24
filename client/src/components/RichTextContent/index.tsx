@@ -1,10 +1,16 @@
-import { FC, TextareaHTMLAttributes, useMemo } from "react";
+import {
+  FC,
+  KeyboardEventHandler,
+  TextareaHTMLAttributes,
+  useMemo,
+} from "react";
 import { SerializedRichText } from "types";
 import { createEditor, Descendant } from "slate";
 import { Editable, RenderLeafProps, Slate, withReact } from "slate-react";
 import { withHistory } from "slate-history";
 import { deserializeRichText } from "helpers";
 import { Toolbar } from "./Toolbar";
+import { HOT_KEY_TO_MARK_MAP, toggleMark } from "./text-format";
 
 const DEFAULT_FONT = "Arial";
 const DEFAULT_FONT_SIZE = 11;
@@ -12,7 +18,7 @@ const DEFAULT_FONT_SIZE = 11;
 type Props = {
   serializedContent?: SerializedRichText;
   canEdit?: boolean;
-} & Omit<TextareaHTMLAttributes<HTMLDivElement>, "readOnly">;
+} & Omit<TextareaHTMLAttributes<HTMLDivElement>, "readOnly" | "onKeyDown">;
 
 const RichTextContent: FC<Props> = ({
   serializedContent,
@@ -43,6 +49,20 @@ const RichTextContent: FC<Props> = ({
     );
   }, [serializedContent]);
 
+  const hotKeyHandler: KeyboardEventHandler<HTMLDivElement> = (e) => {
+    const hotKey =
+      (e.ctrlKey ? "Ctrl+" : "") +
+      (e.altKey ? "Alt+" : "") +
+      (e.shiftKey ? "Shift+" : "") +
+      e.key;
+
+    const mark = HOT_KEY_TO_MARK_MAP[hotKey];
+    if (mark) {
+      e.preventDefault();
+      toggleMark(editor, mark);
+    }
+  };
+
   return (
     <Slate
       editor={editor}
@@ -50,7 +70,12 @@ const RichTextContent: FC<Props> = ({
       onChange={(v) => console.log(JSON.stringify(v))}
     >
       {canEdit && <Toolbar />}
-      <Editable renderLeaf={renderLeaf} readOnly={!canEdit} {...attributes} />
+      <Editable
+        readOnly={!canEdit}
+        renderLeaf={renderLeaf}
+        onKeyDown={hotKeyHandler}
+        {...attributes}
+      />
     </Slate>
   );
 };
