@@ -7,23 +7,13 @@ import { IconType } from "types";
  * Marks
  */
 
-type MarkFormatType =
+export type MarkFormatType =
   | "bold"
   | "italic"
   | "underline"
   | "strike"
   | "sub"
   | "super";
-
-export const HOT_KEY_TO_MARK_MAP: { [k: string]: MarkFormatType | undefined } =
-  {
-    "Ctrl+b": "bold",
-    "Ctrl+i": "italic",
-    "Ctrl+u": "underline",
-    "Alt+Shift+%": "strike",
-    "Ctrl+.": "super",
-    "Ctrl+,": "sub",
-  };
 
 export const MarkButton = ({
   format,

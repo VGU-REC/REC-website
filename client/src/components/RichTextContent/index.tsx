@@ -10,10 +10,19 @@ import { Editable, RenderLeafProps, Slate, withReact } from "slate-react";
 import { withHistory } from "slate-history";
 import { deserializeRichText } from "helpers";
 import { Toolbar } from "./Toolbar";
-import { HOT_KEY_TO_MARK_MAP, toggleMark } from "./text-format";
+import { MarkFormatType, toggleMark } from "./text-format";
 
 const DEFAULT_FONT = "Arial";
 const DEFAULT_FONT_SIZE = 11;
+
+const HOT_KEY_TO_MARK_MAP: { [k: string]: MarkFormatType | undefined } = {
+  "Ctrl+b": "bold",
+  "Ctrl+i": "italic",
+  "Ctrl+u": "underline",
+  "Alt+Shift+%": "strike",
+  "Ctrl+.": "super",
+  "Ctrl+,": "sub",
+};
 
 type Props = {
   serializedContent?: SerializedRichText;
