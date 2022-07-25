@@ -5,8 +5,8 @@ export const AchievementEntity = new EntitySchema<Achievement>({
   name: "achievement",
   columns: {
     id: {
-      type: "int",
-      generated: true,
+      type: "varchar",
+      length: 50,
       primary: true,
     },
     title: {
