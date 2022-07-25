@@ -1,7 +1,6 @@
-import { Icon } from "components";
+import { Icon, IconType } from "components";
 import { Editor } from "slate";
 import { useSlate } from "slate-react";
-import { IconType } from "types";
 
 /**
  * Marks
