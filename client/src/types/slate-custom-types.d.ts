@@ -21,8 +21,8 @@ export type CustomText = {
   align?: "super" | "sub";
   font?: Property.FontFamily;
   size?: number;
-  color?: Property.Color;
-  bgColor?: Property.BackgroundColor;
+  color?: string;
+  bgColor?: "transparent" | (string & {});
 };
 
 export type CustomEditor = BaseEditor & ReactEditor & HistoryEditor;

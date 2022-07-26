@@ -11,9 +11,12 @@ import { withHistory } from "slate-history";
 import { deserializeRichText } from "helpers";
 import { Toolbar } from "./Toolbar";
 import { MarkFormatType, toggleMark } from "./text-format";
-
-const DEFAULT_FONT = "Arial";
-const DEFAULT_FONT_SIZE = 11;
+import {
+  DEFAULT_BACKGROUND_COLOR,
+  DEFAULT_FONT,
+  DEFAULT_FONT_SIZE,
+  DEFAULT_TEXT_COLOR,
+} from "./default-formatting";
 
 const HOT_KEY_TO_MARK_MAP: { [k: string]: MarkFormatType | undefined } = {
   "Ctrl+b": "bold",
@@ -115,8 +118,8 @@ const renderLeaf = ({
             : "none",
         fontFamily: font ?? DEFAULT_FONT,
         fontSize: `${size ?? DEFAULT_FONT_SIZE}pt`,
-        color: color ?? "#000000",
-        backgroundColor: bgColor ?? "transparent",
+        color: color ?? DEFAULT_TEXT_COLOR,
+        backgroundColor: bgColor ?? DEFAULT_BACKGROUND_COLOR,
       }}
     >
       {children}

@@ -2,10 +2,6 @@ import { Icon, IconType } from "components";
 import { Editor } from "slate";
 import { useSlate } from "slate-react";
 
-/**
- * Marks
- */
-
 export type MarkFormatType =
   | "bold"
   | "italic"
@@ -26,15 +22,12 @@ export const MarkButton = ({
 
   return (
     <button
-      className={`w-7 h-7 my-2 mx-[1px] rounded flex justify-center items-center ${
+      className={`toolbar-btn ${
         active
           ? "text-orange-700 bg-orange-100"
           : "text-gray-600 bg-transparent"
       }`}
-      onMouseDown={(e) => {
-        e.preventDefault();
-        toggleMark(editor, format);
-      }}
+      onMouseDown={() => toggleMark(editor, format)}
     >
       <Icon className="text-xl">{icon}</Icon>
     </button>
@@ -65,32 +58,4 @@ export const toggleMark = (editor: Editor, format: MarkFormatType) => {
   } else {
     Editor.addMark(editor, format, true);
   }
-};
-
-/**
- * Font
- */
-
-export const FontSelect = () => {
-  return null;
-};
-
-export const FontSizeInput = () => {
-  return null;
-};
-
-/**
- * Colors
- */
-
-type ColorFormatType = "color" | "bgColor";
-
-export const ColorPicker = ({
-  format,
-  icon,
-}: {
-  format: ColorFormatType;
-  icon: IconType;
-}) => {
-  return null;
 };
