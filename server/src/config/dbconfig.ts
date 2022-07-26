@@ -15,7 +15,7 @@ export const AppDataSource = new DataSource({
   username: "postgres",
   password: "1234",
   database: "recweb",
-  logging: true,
+  logging: false,
   synchronize: true, //in development and debug ok but not for production!!
   entities: [
     AchievementEntity,
@@ -25,10 +25,5 @@ export const AppDataSource = new DataSource({
     BlogEntity,
   ],
 });
-const stupidData = {
-  date: new Date(2022, 4, 25),
-  imagePath: "hoho",
-  string: "hehe",
-  title: "aloha",
-};
+
 export const dataSource = AppDataSource.initialize();

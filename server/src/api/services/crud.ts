@@ -16,11 +16,16 @@ export async function getbyID(
   const db = await dataSource;
   const schemaName = entity.options.name;
   const repo = db.getRepository(entity);
-  const result = await repo
-    .createQueryBuilder()
-    .select()
-    .where(`${schemaName}.id = :id`, { id })
-    .getOne();
+  // const result = await repo
+  //   .createQueryBuilder()
+  //   .select()
+  //   .where(`${schemaName}.id = :id`, { id })
+  //   .getOne();
+  const result = await repo.findOne({
+    where: {
+      id: id,
+    },
+  });
   return result;
 }
 
@@ -53,8 +58,10 @@ export async function update(
     .update(entity)
     .set(data)
     .where(`${schemaName}.id = :id`, { id })
-    .execute(); // <---- measured code goes between startTime and endTime
+    .execute();
+  // <---- measured code goes between startTime and endTime
   // const result = await get<T>(id, entity);
+  console.log(result);
   return result;
 }
 
@@ -71,7 +78,6 @@ export async function deleteByID(
     .delete()
     .from(entity)
     .where(`${schemaName}.id = :id`, { id })
-    .execute(); // <---- measured code goes between startTime and endTime
-  // const result = await get<T>(id, entity);
+    .execute(); 
   return result;
 }

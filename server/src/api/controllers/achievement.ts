@@ -34,9 +34,18 @@ export const createController = async (
     const { generateIdFrom, limit } = option;
     data.id = generateID(data[generateIdFrom], limit, generateIdFrom);
     const result = await create(data, table);
-    res.status(201).json(result);
+    res.status(201).json("Create successfully");
   } catch (error) {
-    res.status(404).send((error as QueryFailedError).driverError);
+    let message = "Object properties are not in correct type";
+    if ((error as QueryFailedError).driverError.code === "23505") {
+      message = "Object already exists";
+    } else if ((error as QueryFailedError).driverError.code === "23502") {
+      message = "Object not have enough property";
+    }
+    // 23502 not right format
+    // 23505 already exist
+    // 22P02
+    res.status(404).send((error as Error).message);
   }
 };
 export const updateController = async (
@@ -53,7 +62,7 @@ export const updateController = async (
     const result = await update(id, data, table);
     let message = "Update successfully";
     if (result.affected === 0) {
-      message = "Data already updated";
+      throw new Error(`Data ${id} is not exist`);
     }
     res.status(200).send(message);
   } catch (error) {
