@@ -1,16 +1,21 @@
-import { getbyID } from "../services/crud";
 import express from "express";
+import { Achievement } from "../../types";
+import { Database, DataType } from "../../types/Database";
 import {
-  createAchievement,
-  deleteAchievement,
-  getAchievement,
-  updateAchievement,
+  createController,
+  deleteController,
+  getController,
+  updateController,
 } from "../controllers/achievement";
 
+import { routerController } from "./routerController";
 const router = express.Router();
-
-router.get("/:id", getAchievement);
-router.post("/", createAchievement);
-router.put("/:id", updateAchievement);
-router.delete("/:id", deleteAchievement);
+const option = "something u put for customize";
+// routerController(router, "achievement");
+const table = "achievement";
+// router.get("/:id", (req, res) => getController(req, res, table));
+// router.post("/", (req, res) => createController(req, res, table));
+// router.put("/:id", (req, res) => updateController(req, res, table));
+// router.delete("/:id", (req, res) => deleteController(req, res, table));
+routerController(router, "achievement");
 export { router as routerAchievement };

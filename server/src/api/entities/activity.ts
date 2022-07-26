@@ -3,8 +3,8 @@ import { RecEvent, Workshop } from "../../types";
 
 const activity = {
   id: {
-    type: "int",
-    generated: true,
+    type: "varchar",
+    length: 30,
     primary: true,
   } as EntitySchemaColumnOptions,
   title: {

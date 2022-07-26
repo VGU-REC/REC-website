@@ -2,9 +2,9 @@ import { Response, Request } from "express";
 import { EntitySchema } from "typeorm";
 import { dataSource } from "../../config";
 import { Achievement, Blog, RecEvent, User, Workshop } from "../../types";
-import { Data, DataType } from "../../types/Database";
+import { Data, Database, DataType } from "../../types/Database";
 import { AchievementEntity } from "../entities/achievement";
-import { EntityCollection, EntityCollectionType } from "../entities/collection";
+import { EntityCollection } from "../entities/collection";
 
 // có cách nào nhét thẳng cái T là Achievement, User, Blog type vào getbyID không hay là phải thông qua keyof Database?
 export async function getbyID(
@@ -12,11 +12,11 @@ export async function getbyID(
   table: keyof typeof EntityCollection
 ) {
   // const result = await get<Data<typeof table>>(id, entity);
-  const entity: EntitySchema<Data<typeof table>> = EntityCollection[table];
+  const entity = EntityCollection[table];
   const db = await dataSource;
   const schemaName = entity.options.name;
   const repo = db.getRepository(entity);
-  const result = repo
+  const result = await repo
     .createQueryBuilder()
     .select()
     .where(`${schemaName}.id = :id`, { id })
@@ -26,9 +26,9 @@ export async function getbyID(
 
 export async function create(data: any, table: keyof typeof EntityCollection) {
   const db = await dataSource;
-  const entity: EntitySchema<Data<typeof table>> = EntityCollection[table];
+  const entity = EntityCollection[table];
   const repo = db.getRepository(entity);
-  const result = repo
+  const result = await repo
     .createQueryBuilder()
     .insert()
     .into(entity)
@@ -45,10 +45,10 @@ export async function update(
   table: keyof typeof EntityCollection
 ) {
   const db = await dataSource;
-  const entity: EntitySchema<Data<typeof table>> = EntityCollection[table];
+  const entity = EntityCollection[table];
   const schemaName = entity.options.name;
   const repo = db.getRepository(entity);
-  const result = repo
+  const result = await repo
     .createQueryBuilder()
     .update(entity)
     .set(data)
@@ -66,7 +66,7 @@ export async function deleteByID(
   const entity: EntitySchema<Data<typeof table>> = EntityCollection[table];
   const schemaName = entity.options.name;
   const repo = db.getRepository(entity);
-  const result = repo
+  const result = await repo
     .createQueryBuilder()
     .delete()
     .from(entity)

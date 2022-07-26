@@ -10,12 +10,12 @@ import {
 } from "./types";
 
 export type Database = {
-  achievement: Achievement,
-  users: User,
-  blog: Blog,
-  "rec-event": RecEvent,
-  "work-shop": Workshop,
+  ["achievement"]: Achievement;
+  ["users"]: User;
+  ["blog"]: Blog;
+  ["rec-event"]: RecEvent;
+  ["work-shop"]: Workshop;
 };
 export type DataType = keyof Database;
 export type Data<T extends DataType> = Database[T];
-const hello : Data<"achievement"> 
+

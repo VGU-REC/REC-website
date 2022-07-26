@@ -1,12 +1,11 @@
 import { EntitySchema } from "typeorm";
-import { User, UserRole } from "../../types";
-
+import { User } from "../../types";
 export const UserEntity = new EntitySchema<User>({
   name: "users",
   columns: {
     id: {
-      type: "int",
-      generated: true,
+      type: "varchar",
+      length: 30,
       primary: true,
     },
     email: {
@@ -16,7 +15,8 @@ export const UserEntity = new EntitySchema<User>({
     },
     role: {
       type: "enum",
-      enum: ["GUEST", "MEMBER", "ADMIN"],
+      enum: ["MEMBER", "ADMIN"],
+      nullable: false,
     },
   },
 });

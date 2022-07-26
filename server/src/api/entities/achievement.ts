@@ -6,7 +6,7 @@ export const AchievementEntity = new EntitySchema<Achievement>({
   columns: {
     id: {
       type: "varchar",
-      length: 50,
+      length: 30,
       primary: true,
     },
     title: {
@@ -23,5 +23,6 @@ export const AchievementEntity = new EntitySchema<Achievement>({
       type: "date",
       nullable: false,
     },
+    
   },
 });

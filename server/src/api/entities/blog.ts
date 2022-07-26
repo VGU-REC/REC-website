@@ -5,8 +5,8 @@ export const BlogEntity = new EntitySchema<Blog>({
   name: "blog",
   columns: {
     id: {
-      type: "int",
-      generated: true,
+      type: "varchar",
+      length: 30,
       primary: true,
     },
     title: {
