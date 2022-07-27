@@ -12,36 +12,36 @@ const Toolbar: FC = () => {
       <FontSelect />
       <FontSizeInput />
 
-      <Tooltip display="Bold (Ctrl+B)">
-        <MarkButton format="bold" icon="format_bold" />
-      </Tooltip>
-      <Tooltip display="Italic (Ctrl+I)">
-        <MarkButton format="italic" icon="format_italic" />
-      </Tooltip>
-      <Tooltip display="Underline (Ctrl+U)">
-        <MarkButton format="underline" icon="format_underlined" />
-      </Tooltip>
-      <Tooltip display="Strikethrough (Alt+Shift+5)">
-        <MarkButton format="strike" icon="strikethrough_s" />
-      </Tooltip>
-      <Tooltip display="Subscript (Ctrl+,)">
-        <MarkButton format="sub" icon="subscript" />
-      </Tooltip>
-      <Tooltip display="Superscript (Ctrl+.)">
-        <MarkButton format="super" icon="superscript" />
-      </Tooltip>
+      <MarkButton format="bold" icon="format_bold">
+        Bold (Ctrl+B)
+      </MarkButton>
+      <MarkButton format="italic" icon="format_italic">
+        Italic (Ctrl+I)
+      </MarkButton>
+      <MarkButton format="underline" icon="format_underlined">
+        Underline (Ctrl+U)
+      </MarkButton>
+      <MarkButton format="strike" icon="strikethrough_s">
+        Strikethrough (Alt+Shift+5)
+      </MarkButton>
+      <MarkButton format="sub" icon="subscript">
+        Subscript (Ctrl+,)
+      </MarkButton>
+      <MarkButton format="super" icon="superscript">
+        Superscript (Ctrl+.)
+      </MarkButton>
 
-      <Tooltip display="Text color">
-        <ColorPickerButton format="color" icon="format_color_text" />
-      </Tooltip>
-      <Tooltip display="Highlight color">
-        <ColorPickerButton format="bgColor" icon="border_color" />
-      </Tooltip>
+      <ColorPickerButton format="color" icon="format_color_text">
+        Text color
+      </ColorPickerButton>
+      <ColorPickerButton format="bgColor" icon="border_color">
+        Highlight color
+      </ColorPickerButton>
     </div>
   );
 };
 
-const Tooltip: FC<{
+export const Tooltip: FC<{
   display: ReactNode;
   children: ReactNode;
 }> = ({ display, children }) => {

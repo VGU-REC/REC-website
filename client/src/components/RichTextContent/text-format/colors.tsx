@@ -1,27 +1,39 @@
 import { Icon, IconType } from "components";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import { Editor } from "slate";
 import {
   DEFAULT_BACKGROUND_COLOR,
   DEFAULT_TEXT_COLOR,
 } from "../default-formatting";
+import { Tooltip } from "../Toolbar";
 
 type ColorFormatType = "color" | "bgColor";
 
 export const ColorPickerButton = ({
   format,
   icon,
+  children,
 }: {
   format: ColorFormatType;
   icon: IconType;
+  children: ReactNode;
 }) => {
   const [showing, setShowing] = useState(false);
 
   return (
     <>
-      <button className="toolbar-btn" onMouseDown={() => setShowing(true)}>
-        <Icon className="text-xl">{icon}</Icon>
-      </button>
+      <Tooltip display={children}>
+        <button
+          className={`toolbar-btn ${
+            showing
+              ? "text-orange-700 bg-orange-100"
+              : "text-gray-600 bg-transparent"
+          }`}
+          onMouseDown={() => setShowing(true)}
+        >
+          <Icon className="text-xl">{icon}</Icon>
+        </button>
+      </Tooltip>
 
       {showing && <ColorPicker onClose={() => setShowing(false)} />}
     </>

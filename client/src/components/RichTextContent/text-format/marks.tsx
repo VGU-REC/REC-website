@@ -1,6 +1,8 @@
 import { Icon, IconType } from "components";
+import { ReactNode } from "react";
 import { Editor } from "slate";
 import { useSlate } from "slate-react";
+import { Tooltip } from "../Toolbar";
 
 export type MarkFormatType =
   | "bold"
@@ -13,24 +15,28 @@ export type MarkFormatType =
 export const MarkButton = ({
   format,
   icon,
+  children,
 }: {
   format: MarkFormatType;
   icon: IconType;
+  children: ReactNode;
 }) => {
   const editor = useSlate();
   const active = isMarkActive(editor, format);
 
   return (
-    <button
-      className={`toolbar-btn ${
-        active
-          ? "text-orange-700 bg-orange-100"
-          : "text-gray-600 bg-transparent"
-      }`}
-      onMouseDown={() => toggleMark(editor, format)}
-    >
-      <Icon className="text-xl">{icon}</Icon>
-    </button>
+    <Tooltip display={children}>
+      <button
+        className={`toolbar-btn ${
+          active
+            ? "text-orange-700 bg-orange-100"
+            : "text-gray-600 bg-transparent"
+        }`}
+        onMouseDown={() => toggleMark(editor, format)}
+      >
+        <Icon className="text-xl">{icon}</Icon>
+      </button>
+    </Tooltip>
   );
 };
 
