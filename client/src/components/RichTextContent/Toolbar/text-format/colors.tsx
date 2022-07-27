@@ -4,8 +4,8 @@ import { Editor } from "slate";
 import {
   DEFAULT_BACKGROUND_COLOR,
   DEFAULT_TEXT_COLOR,
-} from "../default-formatting";
-import { Tooltip } from "../Toolbar";
+} from "../../default-formatting";
+import { Tooltip } from "..";
 
 type ColorFormatType = "color" | "bgColor";
 
@@ -44,14 +44,17 @@ const ColorPicker = ({ onClose }: { onClose: () => void }) => {
   return (
     <div className="relative z-20">
       <div className="fixed top-0 bottom-0 left-0 right-0" onClick={onClose} />
-      <div className="absolute grid grid-cols-10 gap-4">
-        {DEFAULT_COLOR_PALETTE.map((color) => (
-          <span
-            key={color}
-            className="w-5 h-5 rounded-full"
-            style={{ backgroundColor: color }}
-          ></span>
-        ))}
+      <div className="absolute bg-white p-3 rounded-lg shadow-[0_4px_16px_-4px_rgba(0,0,0,0.2)] w-max">
+        <div className="grid grid-cols-10 gap-0.5">
+          {/* Hello */}
+          {DEFAULT_COLOR_PALETTE.map((color) => (
+            <span
+              key={color}
+              className="w-5 h-5 rounded-full border border-gray-200"
+              style={{ backgroundColor: color }}
+            ></span>
+          ))}
+        </div>
       </div>
     </div>
   );

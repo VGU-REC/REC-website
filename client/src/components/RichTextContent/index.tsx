@@ -10,7 +10,7 @@ import { Editable, RenderLeafProps, Slate, withReact } from "slate-react";
 import { withHistory } from "slate-history";
 import { deserializeRichText } from "helpers";
 import { Toolbar } from "./Toolbar";
-import { MarkFormatType, toggleMark } from "./text-format";
+import { MarkFormatType, toggleMark } from "./Toolbar/text-format";
 import {
   DEFAULT_BACKGROUND_COLOR,
   DEFAULT_FONT,
