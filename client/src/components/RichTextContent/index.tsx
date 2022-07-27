@@ -12,7 +12,6 @@ import { deserializeRichText } from "helpers";
 import { Toolbar } from "./Toolbar";
 import { MarkFormatType, toggleMark } from "./Toolbar/text-format";
 import {
-  DEFAULT_BACKGROUND_COLOR,
   DEFAULT_FONT,
   DEFAULT_FONT_SIZE,
   DEFAULT_TEXT_COLOR,
@@ -119,7 +118,7 @@ const renderLeaf = ({
         fontFamily: font ?? DEFAULT_FONT,
         fontSize: `${size ?? DEFAULT_FONT_SIZE}pt`,
         color: color ?? DEFAULT_TEXT_COLOR,
-        backgroundColor: bgColor ?? DEFAULT_BACKGROUND_COLOR,
+        backgroundColor: bgColor ?? "transparent",
       }}
     >
       {children}

@@ -27,12 +27,8 @@ export const MarkButton = ({
   return (
     <Tooltip display={children}>
       <button
-        className={`toolbar-btn ${
-          active
-            ? "text-orange-700 bg-orange-100"
-            : "text-gray-600 bg-transparent"
-        }`}
-        onMouseDown={() => toggleMark(editor, format)}
+        className={`toolbar-btn ${active ? "active" : ""}`}
+        onClick={() => toggleMark(editor, format)}
       >
         <Icon className="text-xl">{icon}</Icon>
       </button>

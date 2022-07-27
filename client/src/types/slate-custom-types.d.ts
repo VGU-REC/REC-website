@@ -22,7 +22,7 @@ export type CustomText = {
   font?: Property.FontFamily;
   size?: number;
   color?: string;
-  bgColor?: "transparent" | (string & {});
+  bgColor?: string;
 };
 
 export type CustomEditor = BaseEditor & ReactEditor & HistoryEditor;

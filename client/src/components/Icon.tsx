@@ -6,7 +6,8 @@ export type IconType =
   | "subscript"
   | "superscript"
   | "palette"
-  | "border_color";
+  | "border_color"
+  | "check";
 
 type Props = {
   children: IconType;

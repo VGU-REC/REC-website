@@ -1,11 +1,19 @@
 import { Icon, IconType } from "components";
-import { ReactNode, useState } from "react";
-import { Editor } from "slate";
 import {
-  DEFAULT_BACKGROUND_COLOR,
-  DEFAULT_TEXT_COLOR,
-} from "../../default-formatting";
+  createContext,
+  ReactNode,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+import { Editor } from "slate";
+import { DEFAULT_TEXT_COLOR } from "../../default-formatting";
 import { Tooltip } from "..";
+import { rgbLuminance } from "helpers";
+import { useSlate } from "slate-react";
 
 type ColorFormatType = "color" | "bgColor";
 
@@ -19,52 +27,131 @@ export const ColorPickerButton = ({
   children: ReactNode;
 }) => {
   const [showing, setShowing] = useState(false);
+  const context = useActiveColor(format);
 
   return (
-    <>
+    <ActiveColorContext.Provider value={context}>
       <Tooltip display={children}>
         <button
-          className={`toolbar-btn ${
-            showing
-              ? "text-orange-700 bg-orange-100"
-              : "text-gray-600 bg-transparent"
-          }`}
-          onMouseDown={() => setShowing(true)}
+          className={`toolbar-btn relative ${showing ? "active" : ""}`}
+          onClick={() => setShowing(true)}
         >
-          <Icon className="text-xl">{icon}</Icon>
+          {format === "color" ? (
+            <Icon
+              className="text-xl relative top-[3px]"
+              style={{
+                clipPath: "inset(0 0 40% 0)",
+              }}
+              children={icon}
+            />
+          ) : (
+            <Icon
+              className="text-xl"
+              style={{
+                clipPath: "inset(0 0 30% 0)",
+              }}
+              children={icon}
+            />
+          )}
+
+          <div
+            className="absolute w-5 h-1 bottom-[3px]"
+            style={{ backgroundColor: context.activeColor ?? "transparent" }}
+          />
         </button>
       </Tooltip>
 
       {showing && <ColorPicker onClose={() => setShowing(false)} />}
-    </>
+    </ActiveColorContext.Provider>
   );
 };
 
 const ColorPicker = ({ onClose }: { onClose: () => void }) => {
+  const focusRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    focusRef.current!.focus();
+  }, []);
+
   return (
-    <div className="relative z-20">
+    <div
+      className="relative z-20"
+      onKeyDown={(e) => {
+        if (e.key === "Escape") {
+          e.preventDefault();
+          onClose();
+        }
+      }}
+    >
       <div className="fixed top-0 bottom-0 left-0 right-0" onClick={onClose} />
-      <div className="absolute bg-white p-3 rounded-lg shadow-[0_4px_16px_-4px_rgba(0,0,0,0.2)] w-max">
-        <div className="grid grid-cols-10 gap-0.5">
-          {/* Hello */}
-          {DEFAULT_COLOR_PALETTE.map((color) => (
-            <span
-              key={color}
-              className="w-5 h-5 rounded-full border border-gray-200"
-              style={{ backgroundColor: color }}
-            ></span>
-          ))}
-        </div>
+
+      <div className="color-picker top-3 -left-7" ref={focusRef} tabIndex={-1}>
+        <ColorPalette colors={DEFAULT_COLOR_PALETTE} />
       </div>
     </div>
   );
 };
 
-const getActiveColor = (editor: Editor, type: ColorFormatType) => {
-  const marks = Editor.marks(editor);
+const ColorPalette = ({ colors }: { colors: string[] }) => {
+  const { activeColor, setActiveColor } = useContext(ActiveColorContext)!;
+
   return (
-    marks?.[type] ??
-    (type === "color" ? DEFAULT_TEXT_COLOR : DEFAULT_BACKGROUND_COLOR)
+    <div className="color-palette">
+      {colors.map((color) => (
+        <button
+          key={color}
+          className="slot"
+          style={{ backgroundColor: color }}
+          onClick={() => setActiveColor(color)}
+        >
+          {color === activeColor && (
+            <Icon
+              children="check"
+              className={`text-base ${
+                rgbLuminance(color) >= 0.5 ? "text-black" : "text-white"
+              }`}
+            />
+          )}
+        </button>
+      ))}
+    </div>
+  );
+};
+
+/**
+ * Context and hook
+ */
+
+type ActiveColorContextType = {
+  activeColor: string | null;
+  setActiveColor: (value: string | null) => void;
+};
+
+const ActiveColorContext = createContext<ActiveColorContextType | null>(null);
+
+const useActiveColor = (type: ColorFormatType): ActiveColorContextType => {
+  const editor = useSlate();
+  const marks = Editor.marks(editor);
+
+  const activeColor =
+    marks?.[type] ?? (type === "color" ? DEFAULT_TEXT_COLOR : null);
+
+  const setActiveColor = useCallback(
+    (value: string | null) => {
+      if (value === activeColor) return;
+
+      if (value) {
+        Editor.addMark(editor, type, value);
+      } else {
+        Editor.removeMark(editor, type);
+      }
+    },
+    [activeColor, editor, type]
+  );
+
+  return useMemo(
+    () => ({ activeColor, setActiveColor }),
+    [activeColor, setActiveColor]
   );
 };
 
