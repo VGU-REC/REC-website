@@ -30,7 +30,7 @@ export const MarkButton = ({
         className={`toolbar-btn ${active ? "active" : ""}`}
         onClick={() => toggleMark(editor, format)}
       >
-        <Icon className="text-xl">{icon}</Icon>
+        <Icon className={`format-${format}-icon`}>{icon}</Icon>
       </button>
     </Tooltip>
   );

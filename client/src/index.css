@@ -99,25 +99,47 @@
   right: 24px;
 }
 
-.toolbar-btn {
-  @apply w-7 h-7 my-2 mx-[1px] rounded flex justify-center items-center text-gray-600 bg-transparent hover:bg-gray-100;
+@layer components {
+  .toolbar-btn {
+    @apply w-7 h-7 my-2 mx-[1px] rounded flex justify-center items-center text-gray-600 bg-transparent hover:bg-gray-100;
+  }
+
+  .toolbar-btn.active,
+  .toolbar-btn:active {
+    @apply text-orange-700 bg-orange-100;
+  }
+
+  .toolbar-btn .material-symbols-outlined {
+    @apply text-xl;
+  }
+
+  .toolbar-btn .format-underline-icon,
+  .toolbar-btn .format-sub-icon {
+    @apply relative top-[1px];
+  }
+
+  .toolbar-btn .format-color-icon {
+    @apply relative top-[3px];
+    clip-path: inset(0 0 40% 0);
+  }
+
+  .toolbar-btn .format-bgColor-icon {
+    clip-path: inset(0 0 30% 0);
+  }
 }
 
-.toolbar-btn.active,
-.toolbar-btn:active {
-  @apply text-orange-700 bg-orange-100;
-}
+@layer components {
+  .color-picker {
+    @apply absolute bg-white p-3 rounded-lg shadow-[0_4px_16px_-4px_rgba(0,0,0,0.2)] w-max;
+  }
 
-.color-picker {
-  @apply absolute bg-white p-3 rounded-lg shadow-[0_4px_16px_-4px_rgba(0,0,0,0.2)] w-max;
-}
+  .color-palette {
+    @apply grid grid-cols-10 gap-0.5;
+  }
 
-.color-palette {
-  @apply grid grid-cols-10 gap-0.5;
-}
-
-.color-palette .slot {
-  @apply w-5 h-5 rounded-full border border-gray-200
+  .color-palette .slot {
+    @apply w-5 h-5 rounded-full border border-gray-200
   hover:cursor-pointer hover:shadow-[0_0_4px_1px_rgba(0,0,0,0.3)] hover:border-none
   flex items-center justify-center;
+  }
 }

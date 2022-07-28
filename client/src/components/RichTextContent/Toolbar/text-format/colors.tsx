@@ -36,23 +36,7 @@ export const ColorPickerButton = ({
           className={`toolbar-btn relative ${showing ? "active" : ""}`}
           onClick={() => setShowing(true)}
         >
-          {format === "color" ? (
-            <Icon
-              className="text-xl relative top-[3px]"
-              style={{
-                clipPath: "inset(0 0 40% 0)",
-              }}
-              children={icon}
-            />
-          ) : (
-            <Icon
-              className="text-xl"
-              style={{
-                clipPath: "inset(0 0 30% 0)",
-              }}
-              children={icon}
-            />
-          )}
+          <Icon className={`format-${format}-icon`}>{icon}</Icon>
 
           <div
             className="absolute w-5 h-1 bottom-[3px]"
