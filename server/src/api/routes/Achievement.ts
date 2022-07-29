@@ -6,7 +6,7 @@ import {
   deleteController,
   getController,
   updateController,
-} from "../controllers/achievement";
+} from "../controllers/crudController";
 
 import { routerController } from "./routerController";
 const router = express.Router();

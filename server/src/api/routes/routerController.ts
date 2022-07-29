@@ -1,12 +1,11 @@
 import { Router } from "express";
-import { Database } from "../../types/Database";
 import { ConcreateRouter, CustomizeRouter } from "../../types/Router";
 import {
   createController,
   deleteController,
   getController,
   updateController,
-} from "../controllers/achievement";
+} from "../controllers/crudController";
 import { EntityCollection } from "../entities/collection";
 
 export function routerController(

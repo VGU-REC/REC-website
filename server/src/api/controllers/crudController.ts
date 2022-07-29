@@ -1,8 +1,5 @@
-import e, { Request, Response } from "express";
-import { title } from "process";
+import { Request, Response } from "express";
 import { QueryFailedError } from "typeorm";
-import { Achievement } from "../../types";
-import { Data, Database } from "../../types/Database";
 import { ConcreateRouter } from "../../types/Router";
 import { EntityCollection } from "../entities/collection";
 import { generateID } from "../helpers/generateID";
