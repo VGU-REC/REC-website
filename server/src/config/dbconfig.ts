@@ -11,11 +11,11 @@ import { UserEntity } from "../api/entities/user";
 export const AppDataSource = new DataSource({
   type: "postgres",
   host: "localhost",
-  port: 5432,
+  port: 5432, 
   username: "postgres",
   password: "1234",
   database: "recweb",
-  logging: false,
+  logging: true,
   synchronize: true, //in development and debug ok but not for production!!
   entities: [
     AchievementEntity,

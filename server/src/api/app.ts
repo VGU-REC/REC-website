@@ -7,9 +7,9 @@ import { routerRecEvent } from "./routes/rec-event";
 import { routerUser } from "./routes/user";
 import { routerWorkShop } from "./routes/work-shop";
 const app = express();
-
-app.listen(5001, () => {
-  console.log("http://localhost:3001");
+const gate = 3001;
+app.listen(gate, () => {
+  console.log(`http://localhost:${gate}`);
 });
 app.use(express.json());
 app.use("/achievement", routerAchievement);
@@ -17,3 +17,4 @@ app.use("/blog", routerBlog);
 app.use("/user", routerUser);
 app.use("/work-shop", routerWorkShop);
 app.use("/rec-event", routerRecEvent);
+app.use("*", (req, res) => res.status(404).send("Page not found"));
