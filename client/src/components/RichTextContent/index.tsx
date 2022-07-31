@@ -18,12 +18,12 @@ import {
 } from "./default-formatting";
 
 const HOT_KEY_TO_MARK_MAP: { [k: string]: MarkFormatType | undefined } = {
-  "Ctrl+b": "bold",
-  "Ctrl+i": "italic",
-  "Ctrl+u": "underline",
-  "Alt+Shift+%": "strike",
-  "Ctrl+.": "super",
-  "Ctrl+,": "sub",
+  "ctrl+b": "bold",
+  "ctrl+i": "italic",
+  "ctrl+u": "underline",
+  "alt+shift+%": "strike",
+  "ctrl+.": "super",
+  "ctrl+,": "sub",
 };
 
 type Props = {
@@ -62,9 +62,9 @@ const RichTextContent: FC<Props> = ({
 
   const hotKeyHandler: KeyboardEventHandler<HTMLDivElement> = (e) => {
     const hotKey =
-      (e.ctrlKey ? "Ctrl+" : "") +
-      (e.altKey ? "Alt+" : "") +
-      (e.shiftKey ? "Shift+" : "") +
+      (e.ctrlKey ? "ctrl+" : "") +
+      (e.altKey ? "alt+" : "") +
+      (e.shiftKey ? "shift+" : "") +
       e.key;
 
     const mark = HOT_KEY_TO_MARK_MAP[hotKey];
