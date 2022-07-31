@@ -1,10 +1,6 @@
-import { Response, Request } from "express";
-import { EntitySchema } from "typeorm";
+
 import { dataSource } from "../../config";
-import { Achievement, Blog, RecEvent, User, Workshop } from "../../types";
-import { Data, Database, DataType } from "../../types/Database";
-import { AchievementEntity } from "../entities/achievement";
-import { EntityCollection } from "../entities/collection";
+import { EntityCollection } from "../entities";
 
 // có cách nào nhét thẳng cái T là Achievement, User, Blog type vào getbyID không hay là phải thông qua keyof Database?
 async function getTable(table: keyof typeof EntityCollection) {

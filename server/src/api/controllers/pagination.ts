@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { EntityCollection } from "../entities/collection";
+import { EntityCollection } from "../entities";
 import { countItems, getItems } from "../services/crud";
 
 export const getItemsController = async (

@@ -1,11 +1,14 @@
 // import { createUser, getUsers, updateUser } from "./models/users";
 // import { getUsers, createUser, updateUser } from "api/models";
 import express from "express";
-import { routerAchievement } from "./routes/achievement";
-import { routerBlog } from "./routes/blog";
-import { routerRecEvent } from "./routes/rec-event";
-import { routerUser } from "./routes/user";
-import { routerWorkShop } from "./routes/work-shop";
+import {
+  routerAchievement,
+  routerBlog,
+  routerRecEvent,
+  routerUser,
+  routerWorkShop,
+} from "./routes";
+
 const app = express();
 const gate = 3001;
 app.listen(gate, () => {

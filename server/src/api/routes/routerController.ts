@@ -1,16 +1,15 @@
 import { Router } from "express";
-import { ConcreateRouter, CustomizeRouter } from "../../types/Router";
+import { ConcreateRouter, CustomizeRouter } from "../../types";
 import {
   createController,
   deleteController,
   getController,
   updateController,
-} from "../controllers/crudController";
-import {
   countItemsController,
   getItemsController,
-} from "../controllers/pagination";
-import { EntityCollection } from "../entities/collection";
+} from "../controllers";
+
+import { EntityCollection } from "../entities";
 
 export function routerController(
   router: Router,

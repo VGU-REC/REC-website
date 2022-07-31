@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { QueryFailedError } from "typeorm";
-import { ConcreateRouter } from "../../types/Router";
-import { EntityCollection } from "../entities/collection";
+import { ConcreateRouter } from "../../types";
+import { EntityCollection } from "../entities";
 import { generateID } from "../helpers/generateID";
 import { getbyID, create, update, deleteByID } from "../services/crud";
 
