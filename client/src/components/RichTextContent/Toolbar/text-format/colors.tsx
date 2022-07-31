@@ -70,21 +70,34 @@ const ColorPicker = ({ onClose }: { onClose: () => void }) => {
       <div className="fixed top-0 bottom-0 left-0 right-0" onClick={onClose} />
 
       <div className="color-picker top-3 -left-7" ref={focusRef} tabIndex={-1}>
-        <ColorPalette colors={DEFAULT_COLOR_PALETTE} />
+        <ColorPalette
+          colors={DEFAULT_COLOR_PALETTE}
+          renderLabel={(color, idx) => (
+            <>
+              {DEFAULT_COLOR_NAMES[idx]} <code>({color})</code>
+            </>
+          )}
+        />
       </div>
     </div>
   );
 };
 
-const ColorPalette = ({ colors }: { colors: string[] }) => {
+const ColorPalette = ({
+  colors,
+  renderLabel,
+}: {
+  colors: string[];
+  renderLabel: (color: string, index: number) => ReactNode;
+}) => {
   const { activeColor, setActiveColor } = useContext(ActiveColorContext)!;
 
   return (
     <div className="color-palette">
-      {colors.map((color) => (
+      {colors.map((color, index) => (
         <button
           key={color}
-          className="slot"
+          className="slot relative group"
           style={{ backgroundColor: color }}
           onClick={() => setActiveColor(color)}
         >
@@ -96,8 +109,21 @@ const ColorPalette = ({ colors }: { colors: string[] }) => {
               }`}
             />
           )}
+
+          <ColorTooltip>{renderLabel(color, index)}</ColorTooltip>
         </button>
       ))}
+    </div>
+  );
+};
+
+const ColorTooltip = ({ children }: { children: ReactNode }) => {
+  return (
+    <div
+      className="absolute top-5 left-5 z-10 hidden group-hover:block
+        px-2 py-1 min-w-max text-xs text-gray-100 bg-gray-900 rounded border-gray-300 border shadow"
+    >
+      {children}
     </div>
   );
 };
