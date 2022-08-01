@@ -1,11 +1,10 @@
-import { Link } from "react-router-dom";
 import { FC } from "react";
 
 const Footer: FC = () => {
   return (
     <div>
-      <footer className="p-3 text-center bg-gray-900 text-white">
-        <div className="grid grid-cols-3">
+      <footer className="p-3 text-center text-white bg-gray-900">
+        <div className="grid lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1">
           <div>
             <div className="flex flex-row justify-center">
               <img className="vgu" src="/vgu_logo.png" alt="Logo" />
@@ -17,33 +16,8 @@ const Footer: FC = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 mt-8">
-            <div>
-              <div className="uppercase py-2">
-                <Link to="/">Home</Link>
-              </div>
-              <div className="uppercase py-2">
-                <Link to="activity">Activity</Link>
-              </div>
-              <div className="uppercase py-2">
-                <Link to="/project">Project</Link>
-              </div>
-            </div>
-            <div>
-              <div className="uppercase py-2">
-                <Link to="blog">Blog</Link>
-              </div>
-              <div className="uppercase py-2">
-                <Link to="achievement">Achievement</Link>
-              </div>
-              <div className="uppercase py-2">
-                <Link to="about">About</Link>
-              </div>
-            </div>
-          </div>
-
-          <div className="pl-20">
-            <div className="flex flex-row p-3">
+          <div className=" md:pl-4 lg:pl-20 xs:flex xs:flex-col xs:items-center xs:mt-3">
+            <div className="flex flex-row lg:p-3 md:py-3">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 512 512"
@@ -56,7 +30,7 @@ const Footer: FC = () => {
               </svg>
               <p className="px-2">robot_club@vgu.edu.vn</p>
             </div>
-            <div className="flex flex-row p-3">
+            <div className="flex flex-row lg:p-3 md:py-3 xs:py-3">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 320 512"
@@ -70,13 +44,13 @@ const Footer: FC = () => {
               <p className="px-2">@vgu.rec</p>
             </div>
 
-            <div className="flex flex-row p-3">
+            <div className="flex flex-row lg:p-3 md:py-3">
               <img
-                className="w-7 h-7 bg-white"
+                className="bg-white w-7 h-7"
                 src="/icons8-map-64.png"
                 alt="address"
               />
-              <p className="px-2">Lê Lai Thủ Dầu Một, Bình Dương</p>
+              <p className="px-2">Lê Lai, Thủ Dầu Một, Bình Dương</p>
             </div>
           </div>
         </div>
