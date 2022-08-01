@@ -7,7 +7,8 @@ export type IconType =
   | "superscript"
   | "palette"
   | "border_color"
-  | "check";
+  | "check"
+  | "add_circle";
 
 type Props = {
   children: IconType;
@@ -16,7 +17,7 @@ type Props = {
 const Icon: FC<Props> = ({ children, className, ...attributes }) => {
   return (
     <span
-      className={`material-symbols-outlined ${className ?? ""}`}
+      className={`material-symbols-outlined select-none ${className ?? ""}`}
       {...attributes}
     >
       {children}
