@@ -6,4 +6,5 @@ export interface Blog {
   content: SerializedRichText;
   author: string;
   dateWritten: Date;
+  imagePaths: string[];
 }

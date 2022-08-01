@@ -6,7 +6,7 @@ export const BlogEntity = new EntitySchema<Blog>({
   columns: {
     id: {
       type: "varchar",
-      length: 30,
+      length: 32,
       primary: true,
     },
     title: {
@@ -24,7 +24,7 @@ export const BlogEntity = new EntitySchema<Blog>({
       nullable: false,
     },
     dateWritten: {
-      type: "date",
+      type: "timestamp",
       nullable: false,
     },
   },

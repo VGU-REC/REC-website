@@ -14,7 +14,7 @@ export const getController = async (
   const id = req.params.id;
   const result = await getbyID(id, table);
   if (result === null) {
-    res.status(404).send(`ID ${id} is not exist`);
+    res.status(404).json({ message: `ID ${id} is not exist` });
     return;
   }
   res.status(200).json(result);
@@ -33,16 +33,17 @@ export const createController = async (
     const result = await create(data, table);
     res.status(201).json("Create successfully");
   } catch (error) {
-    let message = "Object properties are not in correct type";
-    if ((error as QueryFailedError).driverError.code === "23505") {
-      message = "Object already exists";
-    } else if ((error as QueryFailedError).driverError.code === "23502") {
-      message = "Object not have enough property";
-    }
+    // let message = "Object properties are not in correct type";
+    // if ((error as QueryFailedError).driverError.code === "23505") {
+    //   message = "Object already exists";
+    // } else if ((error as QueryFailedError).driverError.code === "23502") {
+    //   message = "Object not have enough property";
+    // }
+
     // 23502 not right format
     // 23505 already exist
     // 22P02
-    res.status(404).send((error as Error).message);
+    res.status(404).json((error as Error).message);
   }
 };
 export const updateController = async (
@@ -61,9 +62,9 @@ export const updateController = async (
     if (result.affected === 0) {
       throw new Error(`Data ${id} is not exist`);
     }
-    res.status(200).send(message);
+    res.status(200).json(message);
   } catch (error) {
-    res.status(404).send((error as Error).message);
+    res.status(404).json((error as Error).message);
   }
 };
 
@@ -75,8 +76,8 @@ export const deleteController = async (
   const id = req.params.id;
   const result = await deleteByID(id, table);
   if (result.affected === 0) {
-    res.status(404).send(`ID ${id} is not exist`);
+    res.status(404).json(`ID ${id} is not exist`);
     return;
   }
-  res.status(200).send("Delete successfully");
+  res.status(200).json("Delete successfully");
 };

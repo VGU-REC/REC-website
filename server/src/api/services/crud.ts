@@ -6,6 +6,7 @@ import { EntityCollection } from "../entities";
 async function getTable(table: keyof typeof EntityCollection) {
   const entity = EntityCollection[table];
   const db = await dataSource;
+  // cái này reference từ bên dbconfig -> không bk là có tạo ra nhiều copy không ?
   return db.getRepository(entity);
 }
 export async function getbyID(
@@ -80,7 +81,7 @@ export async function getItems(
 ) {
   const skip = (page - 1) * limit;
   const tableRepository = await getTable(table);
-  const result = await tableRepository.find({ skip: skip, take: limit });
+  const result = await tableRepository.find({ skip: skip, take: limit, order: {date: "desc"} });
   return result;
 }
 

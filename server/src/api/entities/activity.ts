@@ -4,7 +4,7 @@ import { RecEvent, Workshop } from "../../types";
 const activity = {
   id: {
     type: "varchar",
-    length: 30,
+    length: 32,
     primary: true,
   } as EntitySchemaColumnOptions,
   title: {
@@ -17,12 +17,12 @@ const activity = {
     nullable: false,
   } as EntitySchemaColumnOptions,
   date: {
-    type: "date",
+    type: "timestamp",
     nullable: false,
   } as EntitySchemaColumnOptions,
   imagePaths: {
     type: "varchar",
-    length: 256,
+    length: 1024,
     nullable: true, // tam thoi true tai chua bik store ntn
     array: true,
   } as EntitySchemaColumnOptions,

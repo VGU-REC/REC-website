@@ -5,12 +5,12 @@ export const UserEntity = new EntitySchema<User>({
   columns: {
     id: {
       type: "varchar",
-      length: 30,
+      length: 32,
       primary: true,
     },
     email: {
       type: "varchar",
-      length: 256,
+      length: 64,
       nullable: false,
     },
     role: {

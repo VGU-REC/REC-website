@@ -6,7 +6,7 @@ import { UserEntity } from "./user";
 
 export const EntityCollection = {
   achievement: AchievementEntity,
-  users: UserEntity,
+  // users: UserEntity,
   blog: BlogEntity,
   "rec-event": RecEventEntity,
   "work-shop": WorkshopEntity,

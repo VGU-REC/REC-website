@@ -76,7 +76,7 @@ Get **total** number of items:
 
 Get number of items **per page**":
 
-[GET] /something/?page=x?limit=y
+[GET] /something/?page=x&limit=y
 
 This means that get *y* items from page *x* 
 
