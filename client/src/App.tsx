@@ -54,11 +54,11 @@ const content: Descendant[] = [
   },
   {
     type: "paragraph",
-    children: [{ text: "textColor", color: "#f00" }],
+    children: [{ text: "textColor", color: "#ff0000" }],
   },
   {
     type: "paragraph",
-    children: [{ text: "highlightColor", bgColor: "#ff0" }],
+    children: [{ text: "highlightColor", bgColor: "#ffff00" }],
   },
 ];
 

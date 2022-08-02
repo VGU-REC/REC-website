@@ -2,6 +2,7 @@ import { Icon, IconType } from "components";
 import {
   createContext,
   ReactNode,
+  RefObject,
   useCallback,
   useContext,
   useEffect,
@@ -45,16 +46,29 @@ export const ColorPickerButton = ({
         </button>
       </Tooltip>
 
-      {showing && <ColorPicker onClose={() => setShowing(false)} />}
+      {showing && (
+        <ColorPicker
+          onClose={() => setShowing(false)}
+          includeTransparency={format === "bgColor"}
+        />
+      )}
     </ActiveColorContext.Provider>
   );
 };
 
-const ColorPicker = ({ onClose }: { onClose: () => void }) => {
-  const focusRef = useRef<HTMLDivElement>(null);
+const ColorPicker = ({
+  onClose,
+  includeTransparency,
+}: {
+  onClose: () => void;
+  includeTransparency: boolean;
+}) => {
+  const pickerRef = useRef<HTMLDivElement>(null);
+  const { customColors } = useContext(CustomColorsContext)!;
+  const { setActiveColor } = useContext(ActiveColorContext)!;
 
   useEffect(() => {
-    focusRef.current!.focus();
+    pickerRef.current!.focus();
   }, []);
 
   return (
@@ -69,16 +83,115 @@ const ColorPicker = ({ onClose }: { onClose: () => void }) => {
     >
       <div className="fixed top-0 bottom-0 left-0 right-0" onClick={onClose} />
 
-      <div className="color-picker top-3 -left-7" ref={focusRef} tabIndex={-1}>
+      <div className="color-picker top-3 -left-7" ref={pickerRef} tabIndex={-1}>
+        <CustomColorInput pickerRef={pickerRef} />
+        <ColorPalette
+          colors={customColors}
+          renderLabel={(color) => (
+            <>
+              Custom color <code>[{color}]</code>
+            </>
+          )}
+        />
+
+        <hr className="my-3 border-gray-300" />
+
         <ColorPalette
           colors={DEFAULT_COLOR_PALETTE}
           renderLabel={(color, idx) => (
             <>
-              {DEFAULT_COLOR_NAMES[idx]} <code>({color})</code>
+              {DEFAULT_COLOR_NAMES[idx]} <code>[{color}]</code>
             </>
           )}
         />
+
+        {includeTransparency && (
+          <button
+            className="border border-gray-300 text-gray-700 rounded-full flex items-center justify-center w-full mt-3
+              bg-white hover:bg-gray-100 active:bg-gray-200"
+            onClick={() => setActiveColor(null)}
+          >
+            <Icon className="text-base" children="format_color_reset" />
+            <span className="text-sm ml-0.5">None</span>
+          </button>
+        )}
       </div>
+    </div>
+  );
+};
+
+const CustomColorInput = ({
+  pickerRef,
+}: {
+  pickerRef: RefObject<HTMLDivElement>;
+}) => {
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [colorToAdd, setColorToAdd] = useState<string | null>(null);
+  const { activeColor } = useContext(ActiveColorContext)!;
+  const { addCustomColor } = useContext(CustomColorsContext)!;
+
+  return (
+    <div className="flex">
+      <span className="text-sm uppercase font-mono font-bold text-gray-700 mr-2 relative top-0.5">
+        Custom colors
+      </span>
+
+      <span className="ml-auto">
+        {colorToAdd && (
+          <ColorTooltip
+            display={
+              <>
+                Add to color palette <code>[{colorToAdd}]</code>
+              </>
+            }
+          >
+            <button
+              className="w-5 h-5 rounded-full inline-flex items-center justify-center border border-gray-200 mr-1 relative -top-1"
+              style={{ backgroundColor: colorToAdd }}
+              onClick={() => {
+                const existing = pickerRef.current!.querySelector(
+                  `.slot[data-color="${colorToAdd}"]`
+                );
+                if (existing) {
+                  existing.classList.add("highlighted");
+                  setTimeout(
+                    () => existing.classList.remove("highlighted"),
+                    1500
+                  );
+                } else {
+                  addCustomColor(colorToAdd);
+                }
+                setColorToAdd(null);
+              }}
+            >
+              <Icon
+                children="add"
+                className={`text-sm ${
+                  rgbLuminance(colorToAdd) >= 0.5 ? "text-black" : "text-white"
+                }`}
+              />
+            </button>
+          </ColorTooltip>
+        )}
+
+        <ColorTooltip display="Choose a color">
+          <button className="w-5 h-5 rounded-full">
+            <Icon
+              children="palette"
+              className="text-yellow-700 hover:text-yellow-800"
+              onClick={() => inputRef.current!.click()}
+            />
+          </button>
+        </ColorTooltip>
+      </span>
+
+      <input
+        type="color"
+        className="w-0 invisible"
+        ref={inputRef}
+        value={colorToAdd ?? activeColor!}
+        onChange={(e) => setColorToAdd(e.target.value)}
+      />
     </div>
   );
 };
@@ -95,49 +208,51 @@ const ColorPalette = ({
   return (
     <div className="color-palette">
       {colors.map((color, index) => (
-        <button
-          key={color}
-          className="slot relative group"
-          style={{ backgroundColor: color }}
-          onClick={() => setActiveColor(color)}
-        >
-          {color === activeColor && (
-            <Icon
-              children="check"
-              className={`text-base ${
-                rgbLuminance(color) >= 0.5 ? "text-black" : "text-white"
-              }`}
-            />
-          )}
-
-          <ColorTooltip>{renderLabel(color, index)}</ColorTooltip>
-        </button>
+        <ColorTooltip key={color} display={renderLabel(color, index)}>
+          <button
+            className="slot"
+            style={{ backgroundColor: color }}
+            onClick={() => setActiveColor(color)}
+            data-color={color}
+          >
+            {color === activeColor && (
+              <Icon
+                children="check"
+                className={`text-base ${
+                  rgbLuminance(color) >= 0.5 ? "text-black" : "text-white"
+                }`}
+              />
+            )}
+          </button>
+        </ColorTooltip>
       ))}
     </div>
   );
 };
 
-const ColorTooltip = ({ children }: { children: ReactNode }) => {
+const ColorTooltip = ({
+  display,
+  children,
+}: {
+  display: ReactNode;
+  children: ReactNode;
+}) => {
   return (
-    <div
-      className="absolute top-5 left-5 z-10 hidden group-hover:block
-        px-2 py-1 min-w-max text-xs text-gray-100 bg-gray-900 rounded border-gray-300 border shadow"
-    >
+    <span className="relative group">
       {children}
-    </div>
+      <div
+        className="absolute top-5 left-5 z-10 hidden group-hover:block
+        px-2 py-1 min-w-max text-xs text-gray-100 bg-gray-900 rounded border-gray-300 border shadow"
+      >
+        {display}
+      </div>
+    </span>
   );
 };
 
 /**
- * Context and hook
+ * Hook
  */
-
-type ActiveColorContextType = {
-  activeColor: string | null;
-  setActiveColor: (value: string | null) => void;
-};
-
-const ActiveColorContext = createContext<ActiveColorContextType | null>(null);
 
 const useActiveColor = (type: ColorFormatType): ActiveColorContextType => {
   const editor = useSlate();
@@ -162,6 +277,46 @@ const useActiveColor = (type: ColorFormatType): ActiveColorContextType => {
   return useMemo(
     () => ({ activeColor, setActiveColor }),
     [activeColor, setActiveColor]
+  );
+};
+
+/**
+ * Contexts
+ */
+
+type ActiveColorContextType = {
+  activeColor: string | null;
+  setActiveColor: (value: string | null) => void;
+};
+
+const ActiveColorContext = createContext<ActiveColorContextType | null>(null);
+
+type CustomColorsContextType = {
+  customColors: string[];
+  addCustomColor: (value: string) => void;
+};
+
+const CustomColorsContext = createContext<CustomColorsContextType | null>(null);
+
+export const CustomColorsContextProvider = ({
+  children,
+}: {
+  children: ReactNode;
+}) => {
+  const [customColors, setCustomColors] = useState<string[]>([]);
+  const addCustomColor = useCallback(
+    (value: string) => setCustomColors((prev) => [...prev, value]),
+    []
+  );
+  const value = useMemo(
+    () => ({ customColors, addCustomColor }),
+    [customColors, addCustomColor]
+  );
+
+  return (
+    <CustomColorsContext.Provider value={value}>
+      {children}
+    </CustomColorsContext.Provider>
   );
 };
 

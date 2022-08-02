@@ -139,7 +139,11 @@
 
   .color-palette .slot {
     @apply w-5 h-5 rounded-full border border-gray-200
-  hover:cursor-pointer hover:shadow-[0_0_4px_1px_rgba(0,0,0,0.3)] hover:border-none
+  hover:shadow-[0_0_4px_1px_rgba(0,0,0,0.3)] hover:border-none
   flex items-center justify-center;
+  }
+
+  .color-palette .slot.highlighted {
+    @apply outline outline-2 outline-black;
   }
 }

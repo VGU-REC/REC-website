@@ -1,14 +1,14 @@
 import { FC, HTMLAttributes } from "react";
 
 export type IconType =
-  | `format_${"bold" | "italic" | "underlined" | "color_text"}`
+  | `format_${"bold" | "italic" | "underlined" | `color_${"text" | "reset"}`}`
   | "strikethrough_s"
   | "subscript"
   | "superscript"
   | "palette"
   | "border_color"
   | "check"
-  | "add_circle";
+  | "add";
 
 type Props = {
   children: IconType;

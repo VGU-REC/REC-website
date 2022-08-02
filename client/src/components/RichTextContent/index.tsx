@@ -10,7 +10,11 @@ import { Editable, RenderLeafProps, Slate, withReact } from "slate-react";
 import { withHistory } from "slate-history";
 import { deserializeRichText } from "helpers";
 import { Toolbar } from "./Toolbar";
-import { MarkFormatType, toggleMark } from "./Toolbar/text-format";
+import {
+  CustomColorsContextProvider,
+  MarkFormatType,
+  toggleMark,
+} from "./Toolbar/text-format";
 import {
   DEFAULT_FONT,
   DEFAULT_FONT_SIZE,
@@ -80,7 +84,12 @@ const RichTextContent: FC<Props> = ({
       value={content}
       onChange={(v) => console.log(JSON.stringify(v))}
     >
-      {canEdit && <Toolbar />}
+      {canEdit && (
+        <CustomColorsContextProvider>
+          <Toolbar />
+        </CustomColorsContextProvider>
+      )}
+
       <Editable
         readOnly={!canEdit}
         renderLeaf={renderLeaf}
@@ -90,6 +99,10 @@ const RichTextContent: FC<Props> = ({
     </Slate>
   );
 };
+
+/**
+ * Render Nodes
+ */
 
 const renderLeaf = ({
   attributes,
