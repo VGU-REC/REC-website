@@ -10,7 +10,7 @@ import {
   useRef,
   useState,
 } from "react";
-import { Editor } from "slate";
+import { Editor, Node } from "slate";
 import { DEFAULT_TEXT_COLOR } from "../../default-formatting";
 import { Tooltip } from "..";
 import { rgbLuminance } from "helpers";
@@ -303,11 +303,24 @@ export const CustomColorsContextProvider = ({
 }: {
   children: ReactNode;
 }) => {
-  const [customColors, setCustomColors] = useState<string[]>([]);
+  const editor = useSlate();
+  const [customColors, setCustomColors] = useState<string[]>(() => {
+    const set = new Set<string>();
+
+    for (const [text] of Node.texts(editor)) {
+      const { color, bgColor } = text;
+      if (color && !DEFAULT_COLOR_PALETTE.includes(color)) set.add(color);
+      if (bgColor && !DEFAULT_COLOR_PALETTE.includes(bgColor)) set.add(bgColor);
+    }
+
+    return [...set];
+  });
+
   const addCustomColor = useCallback(
     (value: string) => setCustomColors((prev) => [...prev, value]),
     []
   );
+
   const value = useMemo(
     () => ({ customColors, addCustomColor }),
     [customColors, addCustomColor]
