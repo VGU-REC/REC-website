@@ -189,7 +189,7 @@ const CustomColorInput = ({
         type="color"
         className="w-0 invisible"
         ref={inputRef}
-        value={colorToAdd ?? activeColor!}
+        value={colorToAdd ?? activeColor ?? ""}
         onChange={(e) => setColorToAdd(e.target.value)}
       />
     </div>
