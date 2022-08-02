@@ -49,7 +49,7 @@ export const ColorPickerButton = ({
       {showing && (
         <ColorPicker
           onClose={() => setShowing(false)}
-          includeTransparency={format === "bgColor"}
+          hasNoneButton={format === "bgColor"}
         />
       )}
     </ActiveColorContext.Provider>
@@ -58,10 +58,10 @@ export const ColorPickerButton = ({
 
 const ColorPicker = ({
   onClose,
-  includeTransparency,
+  hasNoneButton,
 }: {
   onClose: () => void;
-  includeTransparency: boolean;
+  hasNoneButton: boolean;
 }) => {
   const pickerRef = useRef<HTMLDivElement>(null);
   const { customColors } = useContext(CustomColorsContext)!;
@@ -105,7 +105,7 @@ const ColorPicker = ({
           )}
         />
 
-        {includeTransparency && (
+        {hasNoneButton && (
           <button
             className="border border-gray-300 text-gray-700 rounded-full flex items-center justify-center w-full mt-3
               bg-white hover:bg-gray-100 active:bg-gray-200"
