@@ -13,6 +13,7 @@ module.exports = {
       },
       screens: {
         xs: "400px",
+        navbar: "1250px",
       },
     },
   },
