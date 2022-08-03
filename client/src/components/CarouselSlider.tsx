@@ -84,7 +84,7 @@ const CarouselSlider: FC<Props> = ({ show, children }) => {
           >
             {children.map(({ id, headline, description, src, alt }) => (
               <div
-                className="w-24 "
+                className="w-24 navbar:w-48"
                 onClick={() => {
                   handleThumbnail(id);
                 }}

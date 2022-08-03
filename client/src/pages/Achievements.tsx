@@ -17,7 +17,7 @@ const Achievements: FC = () => {
           </div>
         </div>
       </div>
-      <CarouselSlider show={4}>
+      <CarouselSlider show={3}>
         {[
           {
             id: 0,
