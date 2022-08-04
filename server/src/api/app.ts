@@ -1,6 +1,7 @@
 // import { createUser, getUsers, updateUser } from "./models/users";
 // import { getUsers, createUser, updateUser } from "api/models";
 import express from "express";
+import "dotenv/config";
 import {
   routerAchievement,
   routerBlog,
@@ -9,7 +10,7 @@ import {
 } from "./routes";
 
 const app = express();
-const gate = 3002;
+const gate = process.env.PORT;
 app.listen(gate, () => {
   console.log(`http://localhost:${gate}`);
 });
