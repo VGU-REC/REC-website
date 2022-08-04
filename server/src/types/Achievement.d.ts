@@ -3,4 +3,5 @@ export interface Achievement {
   title: string;
   imagePath: string;
   date: Date;
+  dateWritten: Date;
 }

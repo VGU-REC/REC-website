@@ -19,8 +19,12 @@ export const AchievementEntity = new EntitySchema<Achievement>({
       length: 1024,
       nullable: false,
     },
-    date: {
+    dateWritten: {
       type: "timestamp",
+      nullable: false,
+    },
+    date: {
+      type: "date",
       nullable: false,
     },
   },

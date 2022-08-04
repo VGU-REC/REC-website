@@ -27,7 +27,6 @@ import "dotenv/config";
 //     BlogEntity,
 //   ],
 // });
-
 export const AppDataSource = new DataSource({
   type: "postgres",
   ssl: { rejectUnauthorized: false },
@@ -38,6 +37,7 @@ export const AppDataSource = new DataSource({
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
   logging: false,
+  dropSchema: false, // cái này dùng để chỉnh sữa lại database schema
   synchronize: false, //in development and debug ok but not for production!!
   entities: [
     AchievementEntity,

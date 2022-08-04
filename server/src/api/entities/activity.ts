@@ -23,7 +23,7 @@ const activity = {
   imagePaths: {
     type: "varchar",
     length: 1024,
-    nullable: true, // tam thoi true tai chua bik store ntn
+    nullable: false,
     array: true,
   } as EntitySchemaColumnOptions,
 };

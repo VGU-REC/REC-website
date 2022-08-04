@@ -35,7 +35,10 @@ something is [user, achievement, work-shop, rec-event, blog]
 something is [user, achievement, work-shop, rec-event, blog]
 
 the object has **match all the properties** in _server/src/types_ folder
+
 **NOTE: Don't need to provide the id** , the id will be automatically generated
+
+**ANOTHER NOTE: the Datewritten must past as timestamp**, for-example `dateWritten = new Date()` this will return the current timestamp 
 
 --> If successfully, return statuscode 201 with message "Create successfully"
 
