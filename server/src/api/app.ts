@@ -10,9 +10,9 @@ import {
 } from "./routes";
 
 const app = express();
-const gate = process.env.PORT;
-app.listen(gate, () => {
-  console.log(`http://localhost:${gate}`);
+const port = process.env.PORT;
+app.listen(port, () => {
+  console.log(`Server running on: http://localhost:${port}`);
 });
 app.use(express.json());
 app.use("/achievement", routerAchievement);
