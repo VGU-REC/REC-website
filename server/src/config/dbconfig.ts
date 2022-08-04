@@ -28,16 +28,15 @@ import "dotenv/config";
 //   ],
 // });
 
-// console.log(process.env);
 export const AppDataSource = new DataSource({
   type: "postgres",
   ssl: { rejectUnauthorized: false },
-  host: "ec2-44-208-88-195.compute-1.amazonaws.com",
-  port: 5432,
-  username: "msrnyrcrtepjcg",
-  url: "postgres://msrnyrcrtepjcg:d220e6c90861a65b991a0071fb15492ef4f4b3a36b41bbb8912d04500b127bb8@ec2-44-208-88-195.compute-1.amazonaws.com:5432/d1dc6biupeiske",
-  password: "d220e6c90861a65b991a0071fb15492ef4f4b3a36b41bbb8912d04500b127bb8",
-  database: "d1dc6biupeiske",
+  host: process.env.DB_HOST,
+  port: parseInt(process.env.DB_PORT as string),
+  username: process.env.DB_USERNAME,
+  url: process.env.DB_URL,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
   logging: false,
   synchronize: false, //in development and debug ok but not for production!!
   entities: [
