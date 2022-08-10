@@ -1,6 +1,7 @@
 export interface Achievement {
-  id: string;
+  id?: string;
   title: string;
   imagePath: string;
   date: Date;
+  dateWritten: Date;
 }

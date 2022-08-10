@@ -1,13 +1,13 @@
 import { SerializedRichText } from "./SerializedRichText";
 
 export interface ProjectIdea {
-  id: string;
+  id?: string;
   topic: string;
   description: SerializedRichText;
 }
 
 export interface RecruitingProject {
-  id: string;
+  id?: string;
   host: User;
   hostFacebook: string;
   hostPhoneNumber: string;
@@ -18,7 +18,7 @@ export interface RecruitingProject {
 }
 
 export interface PastProject {
-  id: string;
+  id?: string;
   title: string;
   author: string;
   content: SerializedRichText;
