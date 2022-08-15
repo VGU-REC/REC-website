@@ -58,17 +58,31 @@ const Pagination: FC<PaginationProps> = ({
 
             {pageNumbers.map((number) => {
               search.set("page", number.toString());
-              return (
-                <li key={number} className="page-item">
-                  <Link
-                    className="block py-1.5 px-3 border-0 bg-transparent outline-none rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
-                    to={{ search: search.toString() }}
-                    onClick={() => paginate(number)}
-                  >
-                    {number}
-                  </Link>
-                </li>
-              );
+              if (currentPage === number) {
+                return (
+                  <li key={number} className="page-item">
+                    <Link
+                      className="block py-1.5 px-3 border-0 bg-transparent outline-none rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none bg-orange-200"
+                      to={{ search: search.toString() }}
+                      onClick={() => paginate(number)}
+                    >
+                      {number}
+                    </Link>
+                  </li>
+                );
+              } else {
+                return (
+                  <li key={number} className="page-item">
+                    <Link
+                      className="block py-1.5 px-3 border-0 bg-transparent outline-none rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
+                      to={{ search: search.toString() }}
+                      onClick={() => paginate(number)}
+                    >
+                      {number}
+                    </Link>
+                  </li>
+                );
+              }
             })}
             {currentPage < i - 1 && (
               <li className="page-item">
