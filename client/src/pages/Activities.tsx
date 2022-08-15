@@ -4,51 +4,52 @@ import { FC, useState } from "react";
 const Activities: FC = () => {
   let data = [
     {
-      headline: "Headline",
+      headline: "Headline1",
       description:
         "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
     },
     {
-      headline: "Headline",
+      headline: "Headline2",
       description:
         "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
     },
     {
-      headline: "Headline",
+      headline: "Headline3",
       description:
         "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
     },
     {
-      headline: "Headline",
+      headline: "Headline4",
       description:
         "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
     },
     {
-      headline: "Headline",
+      headline: "Headline5",
       description:
         "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
     },
     {
-      headline: "Headline",
+      headline: "Headline6",
       description:
         "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
     },
     {
-      headline: "Headline",
+      headline: "Headline7",
       description:
         "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
     },
     {
-      headline: "Headline",
+      headline: "Headline8",
       description:
         "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
     },
     {
-      headline: "Headline",
+      headline: "Headline9",
       description:
         "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
     },
   ];
+
   const [currentPage, setCurrentPage] = useState(1);
   const blogsPerPage = 3;
 
