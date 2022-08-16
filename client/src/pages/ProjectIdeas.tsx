@@ -1,5 +1,15 @@
 import { Card, Carousel, Pagination } from "components";
-import { FC, useState } from "react";
+import { FC, useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
+
+type IdeaProps = {
+  image: string;
+  alt: string;
+  headline: string;
+  description: string;
+}[];
+
+const blogsPerPage = 3;
 
 const ProjectIdeas: FC = () => {
   let data = [
@@ -88,17 +98,27 @@ const ProjectIdeas: FC = () => {
         "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
     },
   ];
-  const [currentPage, setCurrentPage] = useState(1);
-  const blogsPerPage = 3;
+  // Get current page from url search parameter
+  const [searchParams, setSearchParams] = useSearchParams();
+  const page = searchParams.get("page");
+  const pageParam: number = page ? parseInt(page) : 1; // default to 1 if parsed to NaN
+  const currentPage = Math.max(pageParam, 1); // default to 1 if negative
+
+  const [currBlogs, setCurrBlogs] = useState<IdeaProps>([]);
 
   //Get current Blogs
-  const indexOfLastBlog = currentPage * blogsPerPage;
-  const indexOfFirstBlog = indexOfLastBlog - blogsPerPage;
-  const currentBlogs = data.slice(indexOfFirstBlog, indexOfLastBlog);
+  useEffect(() => {
+    const indexOfLastBlog = currentPage * blogsPerPage;
+    const indexOfFirstBlog = indexOfLastBlog - blogsPerPage;
+    const currentBlogs = data.slice(indexOfFirstBlog, indexOfLastBlog);
+    setCurrBlogs(currentBlogs);
+  }, [data, currentPage]);
 
   // Change page
   const paginate = (pagenumber: number) => {
-    setCurrentPage(pagenumber);
+    const newParams = new URLSearchParams(searchParams);
+    newParams.set("page", (pagenumber + 1).toString());
+    setSearchParams(newParams);
   };
 
   return (
@@ -109,7 +129,7 @@ const ProjectIdeas: FC = () => {
           <h1 className="p-3 text-xl font-bold">PROJECT IDEA</h1>
         </div>
         <div className="p-3">
-          {currentBlogs.map(({ image, alt, headline, description }) => (
+          {currBlogs.map(({ image, alt, headline, description }) => (
             <Card
               image={image}
               alt={alt}

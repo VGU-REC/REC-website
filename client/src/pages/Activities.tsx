@@ -1,5 +1,13 @@
 import { CardNoImage, Carousel, Pagination } from "components";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+
+type ActivityProps = {
+  headline: string;
+  description: string;
+}[];
+
+const blogsPerPage = 3;
 
 const Activities: FC = () => {
   let data = [
@@ -50,17 +58,27 @@ const Activities: FC = () => {
     },
   ];
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const blogsPerPage = 3;
+  // Get current page from url search parameter
+  const [searchParams, setSearchParams] = useSearchParams();
+  const page = searchParams.get("page");
+  const pageParam: number = page ? parseInt(page) : 1; // default to 1 if parsed to NaN
+  const currentPage = Math.max(pageParam, 1); // default to 1 if negative
+
+  const [currBlogs, setCurrBlogs] = useState<ActivityProps>([]);
 
   //Get current Blogs
-  const indexOfLastBlog = currentPage * blogsPerPage;
-  const indexOfFirstBlog = indexOfLastBlog - blogsPerPage;
-  const currentBlogs = data.slice(indexOfFirstBlog, indexOfLastBlog);
+  useEffect(() => {
+    const indexOfLastBlog = currentPage * blogsPerPage;
+    const indexOfFirstBlog = indexOfLastBlog - blogsPerPage;
+    const currentBlogs = data.slice(indexOfFirstBlog, indexOfLastBlog);
+    setCurrBlogs(currentBlogs);
+  }, [data, currentPage]);
 
   // Change page
   const paginate = (pagenumber: number) => {
-    setCurrentPage(pagenumber);
+    const newParams = new URLSearchParams(searchParams);
+    newParams.set("page", (pagenumber + 1).toString());
+    setSearchParams(newParams);
   };
 
   return (
@@ -71,7 +89,7 @@ const Activities: FC = () => {
           <h1 className="p-3 text-xl font-bold">ACTIVITY</h1>
         </div>
         <div className="p-3">
-          {currentBlogs.map(({ headline, description }) => (
+          {currBlogs.map(({ headline, description }) => (
             <CardNoImage headline={headline} description={description} />
           ))}
         </div>
