@@ -147,3 +147,13 @@
     @apply outline outline-2 outline-black;
   }
 }
+
+@layer components {
+  .font-size-dropdown {
+    @apply absolute bg-white z-10 shadow-[0_4px_12px_rgba(0,0,0,0.2)] rounded w-full flex flex-col;
+  }
+}
+
+.font-size-dropdown button {
+  @apply hover:bg-gray-100 active:bg-gray-200;
+}
