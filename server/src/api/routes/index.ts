@@ -1,4 +1,4 @@
-export * from "./achievement"
+export * from "./Achievement"
 export * from "./blog"
 export * from "./rec-event"
 export * from "./routerController"
