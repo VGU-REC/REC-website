@@ -1,14 +1,14 @@
-import { DataSource } from "typeorm";
-import "reflect-metadata";
+import { DataSource } from "typeorm"
+import "reflect-metadata"
 import {
   RecEventEntity,
   AchievementEntity,
   BlogEntity,
   WorkshopEntity,
   UserEntity,
-} from "../api/entities";
+} from "../api/entities"
 // import * as dotenv from "dotenv";
-import "dotenv/config";
+import "dotenv/config"
 // import { createUser } from "../api/models/users";
 // export const AppDataSource = new DataSource({
 //   type: "postgres",
@@ -39,12 +39,6 @@ export const AppDataSource = new DataSource({
   logging: false,
   dropSchema: false, // cái này dùng để chỉnh sữa lại database schema
   synchronize: false, //in development and debug ok but not for production!!
-  entities: [
-    AchievementEntity,
-    RecEventEntity,
-    WorkshopEntity,
-    UserEntity,
-    BlogEntity,
-  ],
-});
-export const dataSource = AppDataSource.initialize();
+  entities: [AchievementEntity, RecEventEntity, WorkshopEntity, UserEntity, BlogEntity],
+})
+export const dataSource = await AppDataSource.initialize()

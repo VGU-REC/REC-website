@@ -16,9 +16,16 @@ start -> npm run dev
 
 server on http://localhost:3001/
 
-# API ENDPOINT
+# API ENDPOINT Available
 
-http://localhost:3001/a
+http://localhost:3001/api/achievement
+
+http://localhost:3001/api/blog
+
+http://localhost:3001/api/work-shop
+
+http://localhost:3001/api/rec-event
+
 # CRUD
 
 [GET] /something/:id ({ id })
@@ -38,7 +45,7 @@ the object has **match all the properties** in _server/src/types_ folder
 
 **NOTE: Don't need to provide the id** , the id will be automatically generated
 
-**ANOTHER NOTE: the Datewritten must past as timestamp**, for-example `dateWritten = new Date()` this will return the current timestamp 
+**ANOTHER NOTE: the Datewritten must past as timestamp**, for-example `dateWritten = new Date()` this will return the current timestamp
 
 --> If successfully, return statuscode 201 with message "Create successfully"
 
@@ -81,6 +88,4 @@ Get number of items **per page**":
 
 [GET] /something/?page=x&limit=y
 
-This means that get *y* items from page *x* 
-
-
+This means that get _y_ items from page _x_

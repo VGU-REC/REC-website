@@ -1,5 +1,5 @@
-import { EntitySchema, EntitySchemaColumnOptions } from "typeorm";
-import { RecEvent, Workshop } from "../../types";
+import { EntitySchema, EntitySchemaColumnOptions } from "typeorm"
+import { RecEvent, Workshop } from "../../types"
 
 const activity = {
   id: {
@@ -26,13 +26,13 @@ const activity = {
     nullable: false,
     array: true,
   } as EntitySchemaColumnOptions,
-};
+}
 export const RecEventEntity = new EntitySchema<RecEvent>({
   name: "rec-event",
   columns: {
     ...activity,
   },
-});
+})
 export const WorkshopEntity = new EntitySchema<Workshop>({
   name: "work-shop",
   columns: {
@@ -43,4 +43,4 @@ export const WorkshopEntity = new EntitySchema<Workshop>({
       length: 256,
     },
   },
-});
+})

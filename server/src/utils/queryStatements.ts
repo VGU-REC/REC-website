@@ -27,3 +27,7 @@
 // };
 
 // export { queryPost, TableType };
+let tho;
+export default tho = 5;
+
+export const k = 5;
