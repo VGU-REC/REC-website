@@ -41,4 +41,4 @@ export const AppDataSource = new DataSource({
   synchronize: false, //in development and debug ok but not for production!!
   entities: [AchievementEntity, RecEventEntity, WorkshopEntity, UserEntity, BlogEntity],
 })
-export const dataSource = await AppDataSource.initialize()
+export const dataSource = AppDataSource.initialize()
