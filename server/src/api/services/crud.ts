@@ -22,13 +22,6 @@ export async function getbyID(id: string, table: keyof typeof EntityCollection) 
 export async function create(data: any, table: keyof typeof EntityCollection) {
   const tableRepository = await getTable(table)
   const result = await tableRepository.insert(data)
-  // const result = await repo
-  //   .createQueryBuilder()
-  //   .insert()
-  //   .into(entity)
-  //   .values(data)
-  //   .returning("*")
-  //   .execute();
   return result
 }
 

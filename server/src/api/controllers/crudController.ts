@@ -1,6 +1,6 @@
 import { Request, Response } from "express"
 import { QueryFailedError } from "typeorm"
-import { CustomizeRouter } from "../../types"
+import { Achievement, CustomizeRouter, Data, DataType } from "../../types"
 import { EntityCollection } from "../entities"
 import { generateID } from "../helpers/generateID"
 import { getbyID, create, update, deleteByID } from "../services/crud"
@@ -8,6 +8,7 @@ import { getbyID, create, update, deleteByID } from "../services/crud"
 export const getController = async (
   req: Request,
   res: Response,
+  getbyID: (id: string, table: keyof typeof EntityCollection) => Promise<Achievement | null>,
   table: keyof typeof EntityCollection
 ) => {
   // console.log(req.params);
@@ -33,6 +34,7 @@ export const createController = async (
     await create(data, table)
     res.status(201).send("Create successfully")
   } catch (error) {
+    // need to validation not just use database
     if ((error as QueryFailedError).driverError?.code) {
       if ((error as QueryFailedError).driverError.code === "23505") {
         ;(error as QueryFailedError).message = "Object already exists"
