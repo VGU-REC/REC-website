@@ -1,32 +1,37 @@
-import { dataSource } from "../../config"
-import { EntityCollection } from "../entities"
+import { dataSource } from "../../config";
+import { EntityCollection } from "../entities";
 
-// có cách nào nhét thẳng cái T là Achievement, User, Blog type vào getbyID không hay là phải thông qua keyof Database?
 async function getTable(table: keyof typeof EntityCollection) {
-  const entity = EntityCollection[table]
-  const db = await dataSource
-  // cái này reference từ bên dbconfig -> không bk là có tạo ra nhiều copy không ?
-  return db.getRepository(entity)
+  const entity = EntityCollection[table];
+  const db = await dataSource;
+  return db.getRepository(entity);
 }
-export async function getbyID(id: string, table: keyof typeof EntityCollection) {
-  const db = await dataSource
-  const entity = EntityCollection[table]
+export async function getbyID(
+  id: string,
+  table: keyof typeof EntityCollection
+) {
+  // const db = await dataSource;
+  // const entity = EntityCollection[table];
   // const result = await get<Data<typeof table>>(id, entity);
-  const tableRepository = db.getRepository(entity)
+  const tableRepository = await getTable(table);
   const result = await tableRepository.findOneBy({
     id: id,
-  })
-  return result
+  });
+  return result;
 }
 
 export async function create(data: any, table: keyof typeof EntityCollection) {
-  const tableRepository = await getTable(table)
-  const result = await tableRepository.insert(data)
-  return result
+  const tableRepository = await getTable(table);
+  const result = await tableRepository.insert(data);
+  return result;
 }
 
-export async function update(id: string, data: any, table: keyof typeof EntityCollection) {
-  const tableRepository = await getTable(table)
+export async function update(
+  id: string,
+  data: any,
+  table: keyof typeof EntityCollection
+) {
+  const tableRepository = await getTable(table);
   // So boilerplate
   // const result = await repo
   //   .createQueryBuilder()
@@ -39,31 +44,42 @@ export async function update(id: string, data: any, table: keyof typeof EntityCo
       id: id,
     },
     data
-  )
-  return result
+  );
+  return result;
 }
 
-export async function deleteByID(id: string, table: keyof typeof EntityCollection) {
-  const tableRepository = await getTable(table)
+export async function deleteByID(
+  id: string,
+  table: keyof typeof EntityCollection
+) {
+  const tableRepository = await getTable(table);
 
-  const result = await tableRepository.delete({ id: id })
+  const result = await tableRepository.delete({ id: id });
   // const result = await repo
   //   .createQueryBuilder()
   //   .delete()
   //   .from(entity)
   //   .where(`${schemaName}.id = :id`, { id })
   //   .execute();
-  return result
+  return result;
 }
 
-export async function getItems(limit: number, page: number, table: keyof typeof EntityCollection) {
-  const skip = (page - 1) * limit
-  const tableRepository = await getTable(table)
-  const result = await tableRepository.find({ skip: skip, take: limit, order: { date: "desc" } })
-  return result
+export async function getItems(
+  limit: number,
+  page: number,
+  table: keyof typeof EntityCollection
+) {
+  const skip = (page - 1) * limit;
+  const tableRepository = await getTable(table);
+  const result = await tableRepository.find({
+    skip: skip,
+    take: limit,
+    order: { date: "desc" },
+  });
+  return result;
 }
 
 export async function countItems(table: keyof typeof EntityCollection) {
-  const tableRepository = await getTable(table)
-  return await tableRepository.count()
+  const tableRepository = await getTable(table);
+  return await tableRepository.count();
 }

@@ -28,7 +28,9 @@ http://localhost:3001/api/rec-event
 
 # CRUD
 
-[GET] /something/:id ({ id })
+[GET] /api/something/:id ({ id })
+
+for example: http://localhost:3001/api/achievement/tho-dep-trai
 
 something is [user, achievement, work-shop, rec-event, blog]
 
@@ -38,7 +40,7 @@ something is [user, achievement, work-shop, rec-event, blog]
 
 --> If not match ID, return statuscode 404 with message `ID ${id} is not exist`
 
-[POST] /something/ `(object: Something)`
+[POST] /api/something/ `(object: Something)`
 something is [user, achievement, work-shop, rec-event, blog]
 
 the object has **match all the properties** in _server/src/types_ folder
@@ -55,7 +57,7 @@ the object has **match all the properties** in _server/src/types_ folder
 
 --> If object already exists, return statuscode 404 with message "Object already exists"
 
-[PUT] /something/:id ({ id })
+[PUT] /api/something/:id ({ id })
 
 something is [user, achievement, work-shop, rec-event, blog]
 
@@ -67,7 +69,7 @@ the object has **match one of the properties** in _server/src/types_ folder
 
 --> If not in correct specific object types, return statuscode 404 with message "bla bla bla"
 
-[DELETE] /something/:id ({ id })
+[DELETE] /api/something/:id ({ id })
 
 something is [user, achievement, work-shop, rec-event, blog]
 
@@ -82,10 +84,10 @@ something is [user, achievement, work-shop, rec-event, blog]
 
 Get **total** number of items:
 
-[GET] /something/items
+[GET] /api/something/items
 
 Get number of items **per page**":
 
-[GET] /something/?page=x&limit=y
+[GET] /api/something/?page=x&limit=y
 
 This means that get _y_ items from page _x_
