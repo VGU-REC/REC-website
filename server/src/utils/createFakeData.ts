@@ -10,7 +10,7 @@ async function postFakeData(num: number) {
   };
   data.title += num;
   const response = await fetch("http://localhost:3001/achievement", {
-    method: "GET", // *GET, POST, PUT, DELETE, etc.
+    method: "POST", // *GET, POST, PUT, DELETE, etc.
     headers: {
       "Content-Type": "application/json",
     },
@@ -34,4 +34,3 @@ async function setUp(num: number) {
 }
 
 setUp(50);
-const string = 5; //test git

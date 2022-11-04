@@ -11,7 +11,7 @@ const Blogs: FC = () => {
         </div>
         <div className="p-3">
           <Card
-            image="img1.jpg"
+            image=  "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png"
             alt="Image"
             headline="Headline"
             description="This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
