@@ -34,3 +34,4 @@ async function setUp(num: number) {
 }
 
 setUp(50);
+const string = 5; //test git
