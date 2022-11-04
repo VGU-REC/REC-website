@@ -1,22 +1,19 @@
-
 import { dataSource } from "../../config";
 import { EntityCollection } from "../entities";
 
-// có cách nào nhét thẳng cái T là Achievement, User, Blog type vào getbyID không hay là phải thông qua keyof Database?
 async function getTable(table: keyof typeof EntityCollection) {
   const entity = EntityCollection[table];
   const db = await dataSource;
-  // cái này reference từ bên dbconfig -> không bk là có tạo ra nhiều copy không ?
   return db.getRepository(entity);
 }
 export async function getbyID(
   id: string,
   table: keyof typeof EntityCollection
 ) {
-  const db = await dataSource;
-  const entity = EntityCollection[table];
+  // const db = await dataSource;
+  // const entity = EntityCollection[table];
   // const result = await get<Data<typeof table>>(id, entity);
-  const tableRepository = db.getRepository(entity);
+  const tableRepository = await getTable(table);
   const result = await tableRepository.findOneBy({
     id: id,
   });
@@ -81,13 +78,15 @@ export async function getItems(
 ) {
   const skip = (page - 1) * limit;
   const tableRepository = await getTable(table);
-  const result = await tableRepository.find({ skip: skip, take: limit, order: {date: "desc"} });
+  const result = await tableRepository.find({
+    skip: skip,
+    take: limit,
+    order: { date: "desc" },
+  });
   return result;
 }
 
-export async function countItems(
-  table: keyof typeof EntityCollection
-) {
+export async function countItems(table: keyof typeof EntityCollection) {
   const tableRepository = await getTable(table);
   return await tableRepository.count();
 }
