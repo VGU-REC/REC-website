@@ -1,8 +1,7 @@
-import { EntityCollection } from "../entities"
+import { EntityCollection } from "../entities";
 
 export interface GetQuery {
-  id: string,
-  table: keyof typeof EntityCollection
-  database: Promise<T>
+  id: string;
+  table: keyof typeof EntityCollection;
+  database: Promise<T>;
 }
-

@@ -27,5 +27,9 @@ export const BlogEntity = new EntitySchema<Blog>({
       type: "timestamp",
       nullable: false,
     },
+    date: {
+      type: "date",
+      nullable: false,
+    },
   },
 });

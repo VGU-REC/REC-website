@@ -38,7 +38,7 @@ export const AppDataSource = new DataSource({
   database: process.env.DB_NAME,
   logging: false,
   dropSchema: false, // cái này dùng để chỉnh sữa lại database schema
-  synchronize: false, //in development and debug ok but not for production!!
+  synchronize: true, //in development and debug ok but not for production!!
   entities: [
     AchievementEntity,
     RecEventEntity,

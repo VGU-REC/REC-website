@@ -7,4 +7,5 @@ export interface Blog {
   author: string;
   dateWritten: Date;
   imagePaths: string[];
+  date: Date;
 }
